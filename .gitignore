@@ -4,3 +4,4 @@ dist
 .dev.vars*
 .env*
 .flue-vite.wrangler.jsonc
+packages/live-probe/gateways.created.json

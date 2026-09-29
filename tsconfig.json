@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["@cloudflare/workers-types"],
+    "paths": {
+      "@org/harness": ["./packages/harness/src/index.ts"],
+      "@org/policy-core": ["./packages/policy-core/src/index.ts"]
+    }
+  },
+  "include": [
+    "packages/harness/src/**/*.ts",
+    "packages/policy-core/src/**/*.ts",
+    "packages/router/src/**/*.ts",
+    "packages/gateway/src/**/*.ts"
+  ],
+  "exclude": ["**/*.test.ts"]
+}

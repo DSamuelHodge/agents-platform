@@ -1,14 +1,18 @@
-import { useMcpConnection, useModel, useSkill } from '@flue/runtime';
+import { defineTool, useMcpConnection, useModel, usePersistentState, useSkill, useTool } from '@flue/runtime';
 import { signToken } from '@org/policy-core';
 import { env } from 'cloudflare:workers';
+import * as v from 'valibot';
 import { useHandoff, type TeamMember } from './handoff.ts';
 import type { RoleDefinition, RoleManifest } from './types.ts';
+import { gateMcpFetch, needsWriteApproval, verifyApprovalCode } from './write-approval.ts';
 
 interface HarnessEnv {
   /** Service binding to the private MCP gateway Worker. */
   MCP_GATEWAY: { fetch: typeof fetch };
   /** This department's HMAC key (Worker secret). */
   DEPT_KEY: string;
+  /** Operator code that unlocks write-tier MCP in Legal, Security and Sales. */
+  APPROVAL_CODE?: string;
 }
 
 export interface UseRoleOptions {
@@ -16,7 +20,7 @@ export interface UseRoleOptions {
   team?: Record<string, TeamMember>;
 }
 
-function instructions(m: RoleManifest, team: Record<string, TeamMember>): string {
+function instructions(m: RoleManifest, team: Record<string, TeamMember>, writeGated: boolean): string {
   const lines = [
     `You are the ${m.name} (${m.label}) in the ${m.departmentTitle} department.`,
     m.persona,
@@ -27,6 +31,12 @@ function instructions(m: RoleManifest, team: Record<string, TeamMember>): string
     '- Before any write action, state what you will change. Prefer the smallest change that satisfies the request.',
     '- Never expose credentials, tokens or personal data in replies.',
   ];
+  if (writeGated) {
+    lines.push(
+      '',
+      'Write-tier MCP tools are unmounted until an operator records approval with `record_write_approval` (they supply the department approval code). Do not guess the code. Ask the operator.',
+    );
+  }
   const slugs = Object.keys(team);
   if (slugs.length > 0) {
     lines.push(
@@ -46,25 +56,47 @@ export function useRole(def: RoleDefinition, options: UseRoleOptions = {}): stri
   const { manifest, skills } = def;
   const team = options.team ?? {};
   const e = env as unknown as HarnessEnv;
+  const gated = manifest.mcp.some((g) => needsWriteApproval(manifest.department, g.tier));
+  const [writesApproved, setWritesApproved] = usePersistentState('writes-approved', false);
 
   useModel(manifest.model, manifest.thinkingLevel ? { thinkingLevel: manifest.thinkingLevel } : undefined);
 
   for (const skill of skills) useSkill(skill);
 
+  if (gated) {
+    useTool(
+      defineTool({
+        name: 'record_write_approval',
+        description:
+          'Record an operator approval code so write-tier MCP tools become available for this conversation. Use when the operator has supplied the department approval code and a write is required.',
+        input: v.object({ code: v.string() }),
+        async run({ data }) {
+          if (!(await verifyApprovalCode(data.code, e.APPROVAL_CODE))) {
+            return { output: { approved: false, message: 'Invalid approval code.' } };
+          }
+          setWritesApproved(true);
+          return { output: { approved: true, message: 'Approval recorded. Write-tier MCP tools are now available.' } };
+        },
+      }),
+    );
+  }
+
   for (const grant of manifest.mcp) {
+    const writeLocked = needsWriteApproval(manifest.department, grant.tier) && !writesApproved;
     useMcpConnection({
       name: grant.id,
-      // The host is never resolved: the custom fetch below sends the request over the service binding.
       url: `https://mcp-gateway.internal/mcp/${grant.id}`,
-      fetch: (input, init) => e.MCP_GATEWAY.fetch(input as never, init as never),
-      // Resolved per request: a fresh short-lived token naming this department and role.
+      fetch: (input, init) =>
+        gateMcpFetch((i, n) => e.MCP_GATEWAY.fetch(i as never, n as never), { approved: !writeLocked })(
+          input as never,
+          init as never,
+        ),
       auth: () => signToken({ d: manifest.department, r: manifest.label, aud: 'mcp' }, e.DEPT_KEY, 120),
-      // Only pin an allowlist when the role narrows it; otherwise the gateway filters tools/list.
       ...(grant.tools ? { tools: grant.tools } : {}),
     });
   }
 
   useHandoff(team);
 
-  return instructions(manifest, team);
+  return instructions(manifest, team, gated && !writesApproved);
 }

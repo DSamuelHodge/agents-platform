@@ -1,9 +1,9 @@
 import { signToken } from '@org/policy-core';
 import { Hono } from 'hono';
-import { authenticate, canInvoke } from './auth.ts';
+import { authenticate, canInvoke, type AccessEnv } from './auth.ts';
 import departments from './departments.generated.json';
 
-type Env = { CALLER_KEYS: string } & Record<string, unknown>;
+type Env = { CALLER_KEYS: string } & AccessEnv & Record<string, unknown>;
 const registry = departments as Record<string, { binding: string; roles: string[] }>;
 
 const app = new Hono<{ Bindings: Env }>();

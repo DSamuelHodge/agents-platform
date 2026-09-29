@@ -11,6 +11,11 @@
   "observability": {
     "enabled": true
   },
+  "vars": {
+    "TEAM_DOMAIN": "",
+    "POLICY_AUD": "",
+    "ACCESS_EMAIL_GROUPS": "{}"
+  },
   "services": [
     {
       "binding": "DEPT_AGILE_SCRUM",

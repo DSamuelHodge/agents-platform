@@ -1,0 +1,15 @@
+{
+  "name": "@org/handoff-probe",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "deploy": "vite build && wrangler deploy"
+  },
+  "dependencies": {
+    "@flue/runtime": "2.2.2",
+    "@org/harness": "*",
+    "hono": "^4.6.0"
+  }
+}

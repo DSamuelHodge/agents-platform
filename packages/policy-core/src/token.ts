@@ -64,7 +64,7 @@ export async function verifyToken(
     const ok = await crypto.subtle.verify(
       'HMAC',
       await hmacKey(secret, ['verify']),
-      b64urlDecode(sig),
+      b64urlDecode(sig) as BufferSource,
       enc.encode(payload),
     );
     if (!ok) return null;

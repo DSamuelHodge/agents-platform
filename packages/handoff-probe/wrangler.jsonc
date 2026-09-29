@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-handoff-probe",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "ai": { "binding": "AI" },
+  "migrations": [
+    { "tag": "flue-class-FlueLeadAgent", "new_sqlite_classes": ["FlueLeadAgent"] },
+    { "tag": "flue-class-FlueTeammateAgent", "new_sqlite_classes": ["FlueTeammateAgent"] }
+  ]
+}

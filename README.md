@@ -84,19 +84,25 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 ## First deployment
 
 1. Fill `mcp-catalog.json`; create the 20 AI Gateways named in each `policy.json` (`dept-<slug>`) in the dashboard/IaC.
-2. **Implement `packages/router/src/auth.ts`** (it fails closed: everyone gets 401 until you do), e.g. Cloudflare Access JWT
-   verification and IdP-group mapping. Attach a route/custom domain to the router (it ships with `workers_dev: false`).
-3. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set `MCP_TOKEN_<ID>` secrets.
+2. Set router Access vars (`TEAM_DOMAIN`, `POLICY_AUD`) and the `ACCESS_EMAIL_GROUPS` JSON map
+   (`email` or Access service-token `common_name` → `admin` / `dept:<slug>` / `role:<slug>`).
+   Attach a custom domain to the router (`workers_dev: false`) and put the Access application in front of it.
+3. Create the 20 named AI Gateways: `CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… node scripts/create-ai-gateways.mjs`
+4. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set `MCP_TOKEN_<ID>` secrets.
+   Legal, Security and Sales also get an `APPROVAL_CODE` secret; write-tier MCP stays unusable until
+   `record_write_approval` is called with that code.
 
 ## Verified vs not
 
-Verified here (run, not assumed): all 20 Workers build with Flue 2.2.2 + Vite 8 + the Cloudflare plugin (150 DO classes,
-bindings match migrations); `wrangler deploy --dry-run` passes for departments, gateway and router; 15 unit and
-gateway integration tests pass (cross-department, privilege, forged-token, unclassified-tool cases); `validate` rejects
-out-of-policy manifests; skills repo lints and `npx skills add <repo> --list` discovers all 21 skills.
+Verified locally: all 20 Workers build with Flue 2.2.2 + Vite 8 + the Cloudflare plugin (150 DO classes,
+bindings match migrations); `wrangler deploy --dry-run` passes for departments, gateway and router; unit and
+gateway integration tests (cross-department, privilege, forged-token, unclassified-tool, Access JWT, write-approval
+gate); `validate` rejects out-of-policy manifests; `tsc` type-checks `useRole` and `requireCaller`; skills repo lints.
 
-**Not verified (needs your Cloudflare account):** a live deployment; agents actually running against Workers AI through a
-named AI Gateway; live MCP servers (the gateway is tested against a stub, and SSE list-filtering only via unit test);
-the `handoff` dispatch round trip in workerd; router authentication (deliberately unimplemented).
-Also open: `useRole`/`requireCaller` are not type-checked in CI yet, and write-tier calls have no human approval gate
-(Flue documents a pattern for one in its Tools guide; worth adding for Legal, Security and Sales writes).
+Live account work (this pass, account `Derrick Hodge Account`):
+
+- Created all 20 named AI Gateways (`dept-agile-scrum` … `dept-user-research-experience`).
+- Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` (request routed with gateway id `dept-sales`).
+- Deployed `agents-live-probe` on `*.dshodge2020.workers.dev`: HMAC MCP token sign/verify against a stub `tools/list`, forged key denied; same-isolate handoff analogue returned `ack:qualify ACME`.
+
+Still needs you: `wrangler login` (or `CLOUDFLARE_API_TOKEN` in this shell) to deploy the Flue `handoff-probe` Worker (`init`/`dispatch`/`read` with Durable Objects). It **builds**; it is not on the account yet. Router Access needs `TEAM_DOMAIN`, `POLICY_AUD`, and `ACCESS_EMAIL_GROUPS` before the router admits anyone.

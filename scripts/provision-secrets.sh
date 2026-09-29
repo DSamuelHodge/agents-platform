@@ -21,3 +21,7 @@ for slug in $(node -e "for (const s of JSON.parse(require('child_process').execS
 done
 put DEPT_KEYS "$deptkeys" agents-mcp-gateway
 put CALLER_KEYS "$callerkeys" agents-router
+for gated in legal-compliance security-compliance sales; do
+  ac=$(openssl rand -base64 24)
+  put APPROVAL_CODE "$ac" "agents-$gated"
+done
