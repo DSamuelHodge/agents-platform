@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-backend-development",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "backend-development"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueBackendLeadPrincipalAgent",
+      "new_sqlite_classes": [
+        "FlueBackendLeadPrincipalAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueBackendDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueBackendDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueApiDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueApiDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDatabaseDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueDatabaseDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMicroservicesDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueMicroservicesDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueBackendPerformanceEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueBackendPerformanceEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueIntegrationDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueIntegrationDeveloperAgent"
+      ]
+    }
+  ]
+}

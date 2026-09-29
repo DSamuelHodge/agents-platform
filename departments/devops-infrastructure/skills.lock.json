@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "devops-infrastructure-playbook": {
+      "sha256": "d5230d55c41d88d4870a58429510243c3723f032ba465a22b7d15506319628f5"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

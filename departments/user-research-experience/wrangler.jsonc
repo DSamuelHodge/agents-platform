@@ -1,0 +1,63 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-user-research-experience",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "user-research-experience"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueUxResearchLeadAgent",
+      "new_sqlite_classes": [
+        "FlueUxResearchLeadAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueUserResearcherAgent",
+      "new_sqlite_classes": [
+        "FlueUserResearcherAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueBehavioralAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueBehavioralAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAccessibilitySpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueAccessibilitySpecialistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueInformationArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueInformationArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueUsabilityTesterAgent",
+      "new_sqlite_classes": [
+        "FlueUsabilityTesterAgent"
+      ]
+    }
+  ]
+}

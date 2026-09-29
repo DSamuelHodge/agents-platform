@@ -1,0 +1,33 @@
+{
+  "department": "legal-compliance",
+  "title": "Legal & Compliance",
+  "gatewayId": "dept-legal-compliance",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "legal-compliance-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "contract-mgmt": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

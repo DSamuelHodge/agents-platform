@@ -1,0 +1,33 @@
+{
+  "department": "user-research-experience",
+  "title": "User Research & Experience",
+  "gatewayId": "dept-user-research-experience",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "user-research-experience-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "figma": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

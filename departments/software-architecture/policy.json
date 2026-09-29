@@ -1,0 +1,33 @@
+{
+  "department": "software-architecture",
+  "title": "Software Architecture",
+  "gatewayId": "dept-software-architecture",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "software-architecture-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "cloudflare": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

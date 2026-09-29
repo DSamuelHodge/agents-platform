@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "business-analysis-requirements-playbook": {
+      "sha256": "3cc4ceabb96d168fedd0846c0cc1be6b9934e284337525d3294714f4c9c3ed31"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

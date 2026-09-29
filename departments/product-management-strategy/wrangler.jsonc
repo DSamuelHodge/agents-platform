@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-product-management-strategy",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "product-management-strategy"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueChiefProductOfficerAgent",
+      "new_sqlite_classes": [
+        "FlueChiefProductOfficerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProductManagerAgent",
+      "new_sqlite_classes": [
+        "FlueProductManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAssociateProductManagerAgent",
+      "new_sqlite_classes": [
+        "FlueAssociateProductManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProductOwnerAgent",
+      "new_sqlite_classes": [
+        "FlueProductOwnerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProductAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueProductAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCompetitiveAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueCompetitiveAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProductOperationsAgent",
+      "new_sqlite_classes": [
+        "FlueProductOperationsAgent"
+      ]
+    }
+  ]
+}

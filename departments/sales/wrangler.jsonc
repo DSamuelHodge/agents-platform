@@ -1,0 +1,81 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-sales",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "sales"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueVpOfSalesAgent",
+      "new_sqlite_classes": [
+        "FlueVpOfSalesAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSalesDevelopmentRepSdrAgent",
+      "new_sqlite_classes": [
+        "FlueSalesDevelopmentRepSdrAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAccountExecutiveAgent",
+      "new_sqlite_classes": [
+        "FlueAccountExecutiveAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueEnterpriseSalesRepAgent",
+      "new_sqlite_classes": [
+        "FlueEnterpriseSalesRepAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSolutionsEngineerSalesEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueSolutionsEngineerSalesEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCustomerSuccessManagerAgent",
+      "new_sqlite_classes": [
+        "FlueCustomerSuccessManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAccountManagerAgent",
+      "new_sqlite_classes": [
+        "FlueAccountManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSalesOperationsAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueSalesOperationsAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueRevenueOperationsManagerAgent",
+      "new_sqlite_classes": [
+        "FlueRevenueOperationsManagerAgent"
+      ]
+    }
+  ]
+}

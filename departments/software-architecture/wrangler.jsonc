@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-software-architecture",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "software-architecture"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueChiefArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueChiefArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSolutionsArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueSolutionsArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueApplicationArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueApplicationArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDataArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueDataArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCloudArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueCloudArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueIntegrationArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueIntegrationArchitectAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSecurityArchitectAgent",
+      "new_sqlite_classes": [
+        "FlueSecurityArchitectAgent"
+      ]
+    }
+  ]
+}

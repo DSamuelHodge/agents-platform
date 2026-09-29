@@ -1,0 +1,29 @@
+{
+  "department": "agile-scrum",
+  "title": "Agile & Scrum",
+  "gatewayId": "dept-agile-scrum",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "agile-scrum-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

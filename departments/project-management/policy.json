@@ -1,0 +1,33 @@
+{
+  "department": "project-management",
+  "title": "Project Management",
+  "gatewayId": "dept-project-management",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "project-management-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

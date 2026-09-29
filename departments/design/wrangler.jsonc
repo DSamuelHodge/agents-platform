@@ -1,0 +1,75 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-design",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "design"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueDesignDirectorAgent",
+      "new_sqlite_classes": [
+        "FlueDesignDirectorAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueUxDesignerAgent",
+      "new_sqlite_classes": [
+        "FlueUxDesignerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueUiDesignerAgent",
+      "new_sqlite_classes": [
+        "FlueUiDesignerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueInteractionDesignerAgent",
+      "new_sqlite_classes": [
+        "FlueInteractionDesignerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueVisualDesignerAgent",
+      "new_sqlite_classes": [
+        "FlueVisualDesignerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMotionDesignerAgent",
+      "new_sqlite_classes": [
+        "FlueMotionDesignerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDesignSystemManagerAgent",
+      "new_sqlite_classes": [
+        "FlueDesignSystemManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePrototyperAgent",
+      "new_sqlite_classes": [
+        "FluePrototyperAgent"
+      ]
+    }
+  ]
+}

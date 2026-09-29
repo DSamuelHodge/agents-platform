@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-project-management",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "project-management"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueProgramManagerAgent",
+      "new_sqlite_classes": [
+        "FlueProgramManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProjectManagerAgent",
+      "new_sqlite_classes": [
+        "FlueProjectManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueTechnicalProjectManagerAgent",
+      "new_sqlite_classes": [
+        "FlueTechnicalProjectManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDeliveryManagerAgent",
+      "new_sqlite_classes": [
+        "FlueDeliveryManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueResourceManagerAgent",
+      "new_sqlite_classes": [
+        "FlueResourceManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePmoAnalystAgent",
+      "new_sqlite_classes": [
+        "FluePmoAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePortfolioManagerAgent",
+      "new_sqlite_classes": [
+        "FluePortfolioManagerAgent"
+      ]
+    }
+  ]
+}

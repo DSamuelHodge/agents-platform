@@ -1,0 +1,33 @@
+{
+  "department": "mobile-development",
+  "title": "Mobile Development",
+  "gatewayId": "dept-mobile-development",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "mobile-development-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "figma": {
+      "maxTier": "read",
+      "deny": []
+    }
+  }
+}

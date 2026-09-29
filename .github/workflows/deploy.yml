@@ -1,0 +1,58 @@
+name: deploy
+on:
+  workflow_dispatch:
+    inputs:
+      department:
+        description: "Department slug, or 'all'"
+        default: all
+concurrency: deploy
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      departments: ${{ steps.p.outputs.departments }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - id: p
+        run: |
+          if [ "${{ inputs.department }}" = "all" ]; then list=$(node scripts/list-departments.mjs); else list='["${{ inputs.department }}"]'; fi
+          echo "departments=$list" >> "$GITHUB_OUTPUT"
+  # Order matters: the gateway must exist before departments bind to it, the router last.
+  gateway:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install
+      - run: npx wrangler deploy
+        working-directory: packages/gateway
+  departments:
+    needs: [plan, gateway]
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        department: ${{ fromJSON(needs.plan.outputs.departments) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install
+      - run: npm run deploy -w departments/${{ matrix.department }}
+  router:
+    needs: departments
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install
+      - run: npx wrangler deploy
+        working-directory: packages/router

@@ -1,0 +1,37 @@
+{
+  "department": "security-compliance",
+  "title": "Security & Compliance",
+  "gatewayId": "dept-security-compliance",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "security-compliance-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "cloudflare": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "vuln-scanner": {
+      "maxTier": "read",
+      "deny": []
+    }
+  }
+}

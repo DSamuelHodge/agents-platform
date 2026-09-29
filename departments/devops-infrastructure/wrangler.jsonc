@@ -1,0 +1,87 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-devops-infrastructure",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "devops-infrastructure"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueDevopsManagerAgent",
+      "new_sqlite_classes": [
+        "FlueDevopsManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDevopsEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueDevopsEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSiteReliabilityEngineerSreAgent",
+      "new_sqlite_classes": [
+        "FlueSiteReliabilityEngineerSreAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCloudEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueCloudEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePlatformEngineerAgent",
+      "new_sqlite_classes": [
+        "FluePlatformEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueReleaseManagerAgent",
+      "new_sqlite_classes": [
+        "FlueReleaseManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueInfrastructureEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueInfrastructureEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCiCdEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueCiCdEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueConfigurationManagerAgent",
+      "new_sqlite_classes": [
+        "FlueConfigurationManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMonitoringObservabilityEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueMonitoringObservabilityEngineerAgent"
+      ]
+    }
+  ]
+}

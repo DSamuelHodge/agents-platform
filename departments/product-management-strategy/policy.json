@@ -1,0 +1,33 @@
+{
+  "department": "product-management-strategy",
+  "title": "Product Management & Strategy",
+  "gatewayId": "dept-product-management-strategy",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "product-management-strategy-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "analytics": {
+      "maxTier": "read",
+      "deny": []
+    }
+  }
+}

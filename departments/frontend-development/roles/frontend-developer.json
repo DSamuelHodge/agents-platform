@@ -1,0 +1,36 @@
+{
+  "label": "role/frontend-developer",
+  "roleId": "6.2",
+  "name": "Frontend Developer",
+  "department": "frontend-development",
+  "departmentTitle": "Frontend Development",
+  "lead": false,
+  "persona": "You own Frontend Development work at the Frontend Developer level. Typical deliverables: component implementations, performance budgets, accessibility fixes, build configuration changes. You report to the Frontend Lead/Principal. Do your part of a task thoroughly and hand back a clear result.",
+  "model": "cloudflare/@cf/moonshotai/kimi-k2.6",
+  "skills": [
+    "frontend-development-playbook",
+    "org-conventions"
+  ],
+  "mcp": [
+    {
+      "id": "github",
+      "tier": "read"
+    },
+    {
+      "id": "figma",
+      "tier": "read"
+    },
+    {
+      "id": "jira",
+      "tier": "read"
+    },
+    {
+      "id": "sentry",
+      "tier": "read"
+    },
+    {
+      "id": "cloudflare",
+      "tier": "read"
+    }
+  ]
+}

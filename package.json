@@ -1,0 +1,23 @@
+{
+  "name": "agents-platform",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*", "departments/*"],
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "generate:check": "node scripts/generate.mjs --check",
+    "build-policy": "node scripts/build-policy.mjs",
+    "build-policy:check": "node scripts/build-policy.mjs --check",
+    "sync-skills": "node scripts/sync-skills.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test \"packages/*/src/**/*.test.ts\"",
+    "check": "npm run validate && npm run generate:check && npm run build-policy:check && npm test"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.62.0",
+    "@flue/vite": "2.2.2",
+    "typescript": "^5.6.0",
+    "vite": "^8.0.0",
+    "wrangler": "^4.143.0"
+  }
+}

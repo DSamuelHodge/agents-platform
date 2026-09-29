@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "marketing-playbook": {
+      "sha256": "08b3efff692397ca58aeee23a6145a6b769d3d1b6308ac45829ef7d2c5030b97"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

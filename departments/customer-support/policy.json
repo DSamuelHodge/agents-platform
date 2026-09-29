@@ -1,0 +1,37 @@
+{
+  "department": "customer-support",
+  "title": "Customer Support",
+  "gatewayId": "dept-customer-support",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "customer-support-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "zendesk": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

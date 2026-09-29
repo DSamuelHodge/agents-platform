@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "product-management-strategy-playbook": {
+      "sha256": "df5e36755d3772980f1048753796bcbdb704562252d4d00f2e08224c5a35db02"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

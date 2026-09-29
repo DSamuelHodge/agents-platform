@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "software-architecture-playbook": {
+      "sha256": "2f0cada6ba4c8fd3e58ab7bb45721d66c659a97db9bbd95b30c14eb77f2eecbe"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

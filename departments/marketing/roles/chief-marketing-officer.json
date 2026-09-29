@@ -1,0 +1,47 @@
+{
+  "label": "role/chief-marketing-officer",
+  "roleId": "17.1",
+  "name": "Chief Marketing Officer",
+  "department": "marketing",
+  "departmentTitle": "Marketing",
+  "lead": true,
+  "persona": "You own Marketing work at the Chief Marketing Officer level. Typical deliverables: campaign plans, content drafts, positioning, performance reports, event and partner plans. You set direction for the department, review teammates' output and decide when work should be handed to a specific teammate.",
+  "model": "cloudflare/@cf/moonshotai/kimi-k2.6",
+  "skills": [
+    "marketing-playbook",
+    "org-conventions"
+  ],
+  "mcp": [
+    {
+      "id": "hubspot",
+      "tier": "write"
+    },
+    {
+      "id": "analytics",
+      "tier": "read"
+    },
+    {
+      "id": "slack",
+      "tier": "write"
+    },
+    {
+      "id": "notion",
+      "tier": "write"
+    },
+    {
+      "id": "google-drive",
+      "tier": "write"
+    }
+  ],
+  "delegatesTo": [
+    "product-marketing-manager",
+    "content-marketing-manager",
+    "digital-marketing-specialist",
+    "growth-marketer",
+    "email-marketing-specialist",
+    "marketing-analyst",
+    "brand-manager",
+    "event-marketing-manager",
+    "partner-marketing-manager"
+  ]
+}

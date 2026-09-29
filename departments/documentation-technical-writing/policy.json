@@ -1,0 +1,33 @@
+{
+  "department": "documentation-technical-writing",
+  "title": "Documentation & Technical Writing",
+  "gatewayId": "dept-documentation-technical-writing",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "documentation-technical-writing-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

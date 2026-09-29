@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "legal-compliance-playbook": {
+      "sha256": "531f8f6fd4d00d594ec6f4208dd71590d1617a31bf04b2bbcf4be0d322fce3d8"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

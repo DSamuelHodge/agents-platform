@@ -1,0 +1,96 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-router",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "services": [
+    {
+      "binding": "DEPT_AGILE_SCRUM",
+      "service": "agents-agile-scrum"
+    },
+    {
+      "binding": "DEPT_BACKEND_DEVELOPMENT",
+      "service": "agents-backend-development"
+    },
+    {
+      "binding": "DEPT_BUSINESS_ANALYSIS_REQUIREMENTS",
+      "service": "agents-business-analysis-requirements"
+    },
+    {
+      "binding": "DEPT_CUSTOMER_SUPPORT",
+      "service": "agents-customer-support"
+    },
+    {
+      "binding": "DEPT_DATA_ENGINEERING_ANALYTICS",
+      "service": "agents-data-engineering-analytics"
+    },
+    {
+      "binding": "DEPT_DESIGN",
+      "service": "agents-design"
+    },
+    {
+      "binding": "DEPT_DEVOPS_INFRASTRUCTURE",
+      "service": "agents-devops-infrastructure"
+    },
+    {
+      "binding": "DEPT_DOCUMENTATION_TECHNICAL_WRITING",
+      "service": "agents-documentation-technical-writing"
+    },
+    {
+      "binding": "DEPT_FRONTEND_DEVELOPMENT",
+      "service": "agents-frontend-development"
+    },
+    {
+      "binding": "DEPT_FULL_STACK_DEVELOPMENT",
+      "service": "agents-full-stack-development"
+    },
+    {
+      "binding": "DEPT_LEGAL_COMPLIANCE",
+      "service": "agents-legal-compliance"
+    },
+    {
+      "binding": "DEPT_MARKETING",
+      "service": "agents-marketing"
+    },
+    {
+      "binding": "DEPT_MOBILE_DEVELOPMENT",
+      "service": "agents-mobile-development"
+    },
+    {
+      "binding": "DEPT_PRODUCT_MANAGEMENT_STRATEGY",
+      "service": "agents-product-management-strategy"
+    },
+    {
+      "binding": "DEPT_PROJECT_MANAGEMENT",
+      "service": "agents-project-management"
+    },
+    {
+      "binding": "DEPT_QUALITY_ASSURANCE_TESTING",
+      "service": "agents-quality-assurance-testing"
+    },
+    {
+      "binding": "DEPT_SALES",
+      "service": "agents-sales"
+    },
+    {
+      "binding": "DEPT_SECURITY_COMPLIANCE",
+      "service": "agents-security-compliance"
+    },
+    {
+      "binding": "DEPT_SOFTWARE_ARCHITECTURE",
+      "service": "agents-software-architecture"
+    },
+    {
+      "binding": "DEPT_USER_RESEARCH_EXPERIENCE",
+      "service": "agents-user-research-experience"
+    }
+  ]
+}

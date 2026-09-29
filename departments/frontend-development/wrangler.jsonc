@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-frontend-development",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "frontend-development"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueFrontendLeadPrincipalAgent",
+      "new_sqlite_classes": [
+        "FlueFrontendLeadPrincipalAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueFrontendDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueFrontendDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueJavascriptTypescriptDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueJavascriptTypescriptDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCssStylingSpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueCssStylingSpecialistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueFrontendPerformanceEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueFrontendPerformanceEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueWebAccessibilityDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueWebAccessibilityDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueFrontendBuildEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueFrontendBuildEngineerAgent"
+      ]
+    }
+  ]
+}

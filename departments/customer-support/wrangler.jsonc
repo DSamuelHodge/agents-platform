@@ -1,0 +1,81 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-customer-support",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "customer-support"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueHeadOfSupportAgent",
+      "new_sqlite_classes": [
+        "FlueHeadOfSupportAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCustomerSupportRepTier1Agent",
+      "new_sqlite_classes": [
+        "FlueCustomerSupportRepTier1Agent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueTechnicalSupportEngineerTier2Agent",
+      "new_sqlite_classes": [
+        "FlueTechnicalSupportEngineerTier2Agent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSeniorSupportEngineerTier3Agent",
+      "new_sqlite_classes": [
+        "FlueSeniorSupportEngineerTier3Agent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSupportOperationsManagerAgent",
+      "new_sqlite_classes": [
+        "FlueSupportOperationsManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCommunityManagerAgent",
+      "new_sqlite_classes": [
+        "FlueCommunityManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueCustomerAdvocateAgent",
+      "new_sqlite_classes": [
+        "FlueCustomerAdvocateAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueOnboardingSpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueOnboardingSpecialistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueTrainingSpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueTrainingSpecialistAgent"
+      ]
+    }
+  ]
+}

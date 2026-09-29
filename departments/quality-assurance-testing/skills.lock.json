@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "quality-assurance-testing-playbook": {
+      "sha256": "9b07f67adf60242fcaf1825f1646e95cf927a42948f3b748971434ada94c46bd"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "department": "marketing",
+  "title": "Marketing",
+  "gatewayId": "dept-marketing",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "marketing-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "hubspot": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "analytics": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

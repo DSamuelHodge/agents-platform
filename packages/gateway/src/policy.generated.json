@@ -1,0 +1,2958 @@
+{
+  "version": 1,
+  "catalog": {
+    "github": {
+      "url": "https://mcp.example.com/github",
+      "description": "Source code, issues and pull requests",
+      "overrides": {}
+    },
+    "jira": {
+      "url": "https://mcp.example.com/jira",
+      "description": "Issue and project tracking",
+      "overrides": {}
+    },
+    "notion": {
+      "url": "https://mcp.example.com/notion",
+      "description": "Docs and knowledge base",
+      "overrides": {}
+    },
+    "google-drive": {
+      "url": "https://mcp.example.com/google-drive",
+      "description": "Files and shared documents",
+      "overrides": {}
+    },
+    "slack": {
+      "url": "https://mcp.example.com/slack",
+      "description": "Team messaging",
+      "overrides": {}
+    },
+    "figma": {
+      "url": "https://mcp.example.com/figma",
+      "description": "Design files",
+      "overrides": {}
+    },
+    "sentry": {
+      "url": "https://mcp.example.com/sentry",
+      "description": "Error and performance monitoring",
+      "overrides": {}
+    },
+    "cloudflare": {
+      "url": "https://mcp.example.com/cloudflare",
+      "description": "Cloudflare account resources",
+      "overrides": {}
+    },
+    "pagerduty": {
+      "url": "https://mcp.example.com/pagerduty",
+      "description": "Incident response and on-call",
+      "overrides": {}
+    },
+    "warehouse": {
+      "url": "https://mcp.example.com/warehouse",
+      "description": "Analytics data warehouse",
+      "overrides": {}
+    },
+    "hubspot": {
+      "url": "https://mcp.example.com/hubspot",
+      "description": "Marketing automation and CRM",
+      "overrides": {}
+    },
+    "salesforce": {
+      "url": "https://mcp.example.com/salesforce",
+      "description": "Sales CRM",
+      "overrides": {}
+    },
+    "zendesk": {
+      "url": "https://mcp.example.com/zendesk",
+      "description": "Support tickets and help center",
+      "overrides": {}
+    },
+    "analytics": {
+      "url": "https://mcp.example.com/analytics",
+      "description": "Product and web analytics",
+      "overrides": {}
+    },
+    "vuln-scanner": {
+      "url": "https://mcp.example.com/vuln-scanner",
+      "description": "Vulnerability and dependency scanning",
+      "overrides": {}
+    },
+    "contract-mgmt": {
+      "url": "https://mcp.example.com/contract-mgmt",
+      "description": "Contract lifecycle management",
+      "overrides": {}
+    }
+  },
+  "departments": {
+    "agile-scrum": {
+      "servers": {
+        "jira": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/agile-coach": {
+          "servers": {
+            "jira": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/scrum-master": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/kanban-lead": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/release-train-engineer": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/agile-transformation-lead": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "backend-development": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "cloudflare": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/backend-lead-principal": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/backend-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/api-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/database-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/microservices-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/backend-performance-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/integration-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "business-analysis-requirements": {
+      "servers": {
+        "jira": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/lead-business-analyst": {
+          "servers": {
+            "jira": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/business-analyst": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/systems-analyst": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/process-analyst": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/domain-expert-sme": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/requirements-engineer": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "customer-support": {
+      "servers": {
+        "zendesk": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "jira": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/head-of-support": {
+          "servers": {
+            "zendesk": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/customer-support-rep-tier-1": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/technical-support-engineer-tier-2": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/senior-support-engineer-tier-3": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/support-operations-manager": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/community-manager": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/customer-advocate": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/onboarding-specialist": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/training-specialist": {
+          "servers": {
+            "zendesk": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "data-engineering-analytics": {
+      "servers": {
+        "warehouse": {
+          "maxTier": "write"
+        },
+        "github": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/data-engineering-manager": {
+          "servers": {
+            "warehouse": {
+              "tier": "write"
+            },
+            "github": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/data-engineer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/data-warehouse-engineer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/etl-developer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/data-analyst": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/business-intelligence-developer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/data-scientist": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/ml-engineer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/analytics-engineer": {
+          "servers": {
+            "warehouse": {
+              "tier": "read"
+            },
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "design": {
+      "servers": {
+        "figma": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/design-director": {
+          "servers": {
+            "figma": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/ux-designer": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/ui-designer": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/interaction-designer": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/visual-designer": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/motion-designer": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/design-system-manager": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/prototyper": {
+          "servers": {
+            "figma": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "devops-infrastructure": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "cloudflare": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "write"
+        },
+        "pagerduty": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/devops-manager": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "cloudflare": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "write"
+            },
+            "pagerduty": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/devops-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/site-reliability-engineer-sre": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/cloud-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/platform-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/release-manager": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/infrastructure-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/ci-cd-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/configuration-manager": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/monitoring-observability-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "pagerduty": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "documentation-technical-writing": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/documentation-manager": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/technical-writer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/api-documentation-specialist": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/knowledge-base-manager": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/video-tutorial-creator": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/information-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/content-strategist": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "frontend-development": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "figma": {
+          "maxTier": "read"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "cloudflare": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/frontend-lead-principal": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/frontend-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/javascript-typescript-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/css-styling-specialist": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/frontend-performance-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/web-accessibility-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/frontend-build-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "full-stack-development": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "cloudflare": {
+          "maxTier": "read"
+        },
+        "figma": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/full-stack-lead": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/full-stack-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/mean-mern-stack-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/rapid-prototyper": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "legal-compliance": {
+      "servers": {
+        "contract-mgmt": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/general-counsel": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/corporate-lawyer": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/privacy-officer": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/intellectual-property-attorney": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/compliance-manager": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/contract-manager": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/paralegal": {
+          "servers": {
+            "contract-mgmt": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "marketing": {
+      "servers": {
+        "hubspot": {
+          "maxTier": "write"
+        },
+        "analytics": {
+          "maxTier": "read"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/chief-marketing-officer": {
+          "servers": {
+            "hubspot": {
+              "tier": "write"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/product-marketing-manager": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/content-marketing-manager": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/digital-marketing-specialist": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/growth-marketer": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/email-marketing-specialist": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/marketing-analyst": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/brand-manager": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/event-marketing-manager": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/partner-marketing-manager": {
+          "servers": {
+            "hubspot": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "mobile-development": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "figma": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/mobile-lead": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/ios-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/android-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/react-native-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/flutter-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/mobile-ui-ux-developer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/mobile-devops-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "product-management-strategy": {
+      "servers": {
+        "notion": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "analytics": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/chief-product-officer": {
+          "servers": {
+            "notion": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/product-manager": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/associate-product-manager": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/product-owner": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/product-analyst": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/competitive-analyst": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/product-operations": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "analytics": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "project-management": {
+      "servers": {
+        "jira": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/program-manager": {
+          "servers": {
+            "jira": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/project-manager": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/technical-project-manager": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/delivery-manager": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/resource-manager": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/pmo-analyst": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/portfolio-manager": {
+          "servers": {
+            "jira": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "quality-assurance-testing": {
+      "servers": {
+        "github": {
+          "maxTier": "write"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "sentry": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/qa-manager": {
+          "servers": {
+            "github": {
+              "tier": "write"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/qa-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/manual-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/test-automation-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/performance-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/security-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/mobile-qa-specialist": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/api-integration-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/regression-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/uat-coordinator": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "sales": {
+      "servers": {
+        "salesforce": {
+          "maxTier": "write"
+        },
+        "hubspot": {
+          "maxTier": "write"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/vp-of-sales": {
+          "servers": {
+            "salesforce": {
+              "tier": "write"
+            },
+            "hubspot": {
+              "tier": "write"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/sales-development-rep-sdr": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/account-executive": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/enterprise-sales-rep": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/solutions-engineer-sales-engineer": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/customer-success-manager": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/account-manager": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/sales-operations-analyst": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/revenue-operations-manager": {
+          "servers": {
+            "salesforce": {
+              "tier": "read"
+            },
+            "hubspot": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "security-compliance": {
+      "servers": {
+        "github": {
+          "maxTier": "read"
+        },
+        "sentry": {
+          "maxTier": "read"
+        },
+        "cloudflare": {
+          "maxTier": "read"
+        },
+        "jira": {
+          "maxTier": "write"
+        },
+        "vuln-scanner": {
+          "maxTier": "read"
+        }
+      },
+      "roles": {
+        "role/chief-information-security-officer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "write"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/security-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/application-security-engineer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/penetration-tester": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/security-analyst": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/compliance-officer": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/identity-access-manager": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/security-operations-analyst": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "sentry": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            },
+            "vuln-scanner": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "software-architecture": {
+      "servers": {
+        "github": {
+          "maxTier": "read"
+        },
+        "notion": {
+          "maxTier": "write"
+        },
+        "cloudflare": {
+          "maxTier": "read"
+        },
+        "jira": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/chief-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "write"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/solutions-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/application-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/data-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/cloud-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/integration-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/security-architect": {
+          "servers": {
+            "github": {
+              "tier": "read"
+            },
+            "notion": {
+              "tier": "read"
+            },
+            "cloudflare": {
+              "tier": "read"
+            },
+            "jira": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    },
+    "user-research-experience": {
+      "servers": {
+        "notion": {
+          "maxTier": "write"
+        },
+        "figma": {
+          "maxTier": "read"
+        },
+        "slack": {
+          "maxTier": "write"
+        },
+        "google-drive": {
+          "maxTier": "write"
+        }
+      },
+      "roles": {
+        "role/ux-research-lead": {
+          "servers": {
+            "notion": {
+              "tier": "write"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "write"
+            },
+            "google-drive": {
+              "tier": "write"
+            }
+          }
+        },
+        "role/user-researcher": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/behavioral-analyst": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/accessibility-specialist": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/information-architect": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        },
+        "role/usability-tester": {
+          "servers": {
+            "notion": {
+              "tier": "read"
+            },
+            "figma": {
+              "tier": "read"
+            },
+            "slack": {
+              "tier": "read"
+            },
+            "google-drive": {
+              "tier": "read"
+            }
+          }
+        }
+      }
+    }
+  }
+}

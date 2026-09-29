@@ -1,0 +1,57 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-agile-scrum",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "agile-scrum"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueAgileCoachAgent",
+      "new_sqlite_classes": [
+        "FlueAgileCoachAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueScrumMasterAgent",
+      "new_sqlite_classes": [
+        "FlueScrumMasterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueKanbanLeadAgent",
+      "new_sqlite_classes": [
+        "FlueKanbanLeadAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueReleaseTrainEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueReleaseTrainEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAgileTransformationLeadAgent",
+      "new_sqlite_classes": [
+        "FlueAgileTransformationLeadAgent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "department": "backend-development",
+  "title": "Backend Development",
+  "gatewayId": "dept-backend-development",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "backend-development-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "read",
+      "deny": []
+    },
+    "cloudflare": {
+      "maxTier": "read",
+      "deny": []
+    }
+  }
+}

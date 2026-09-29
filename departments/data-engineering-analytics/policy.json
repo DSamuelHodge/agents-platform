@@ -1,0 +1,33 @@
+{
+  "department": "data-engineering-analytics",
+  "title": "Data Engineering & Analytics",
+  "gatewayId": "dept-data-engineering-analytics",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "data-engineering-analytics-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "warehouse": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

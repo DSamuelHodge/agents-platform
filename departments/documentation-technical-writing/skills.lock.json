@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "documentation-technical-writing-playbook": {
+      "sha256": "6c855555de3c98680066e555411cb93dc0453770996915e8825b49a0873038cc"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

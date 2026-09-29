@@ -1,0 +1,33 @@
+{
+  "department": "sales",
+  "title": "Sales",
+  "gatewayId": "dept-sales",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "sales-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "salesforce": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "hubspot": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

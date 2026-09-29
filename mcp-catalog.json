@@ -1,0 +1,85 @@
+{
+  "_comment": "Replace every url with the real MCP endpoint. Add tool 'overrides' once you have run tools/list against each server; anything not matching a read/write verb pattern is treated as admin.",
+  "servers": {
+    "github": {
+      "url": "https://mcp.example.com/github",
+      "description": "Source code, issues and pull requests",
+      "overrides": {}
+    },
+    "jira": {
+      "url": "https://mcp.example.com/jira",
+      "description": "Issue and project tracking",
+      "overrides": {}
+    },
+    "notion": {
+      "url": "https://mcp.example.com/notion",
+      "description": "Docs and knowledge base",
+      "overrides": {}
+    },
+    "google-drive": {
+      "url": "https://mcp.example.com/google-drive",
+      "description": "Files and shared documents",
+      "overrides": {}
+    },
+    "slack": {
+      "url": "https://mcp.example.com/slack",
+      "description": "Team messaging",
+      "overrides": {}
+    },
+    "figma": {
+      "url": "https://mcp.example.com/figma",
+      "description": "Design files",
+      "overrides": {}
+    },
+    "sentry": {
+      "url": "https://mcp.example.com/sentry",
+      "description": "Error and performance monitoring",
+      "overrides": {}
+    },
+    "cloudflare": {
+      "url": "https://mcp.example.com/cloudflare",
+      "description": "Cloudflare account resources",
+      "overrides": {}
+    },
+    "pagerduty": {
+      "url": "https://mcp.example.com/pagerduty",
+      "description": "Incident response and on-call",
+      "overrides": {}
+    },
+    "warehouse": {
+      "url": "https://mcp.example.com/warehouse",
+      "description": "Analytics data warehouse",
+      "overrides": {}
+    },
+    "hubspot": {
+      "url": "https://mcp.example.com/hubspot",
+      "description": "Marketing automation and CRM",
+      "overrides": {}
+    },
+    "salesforce": {
+      "url": "https://mcp.example.com/salesforce",
+      "description": "Sales CRM",
+      "overrides": {}
+    },
+    "zendesk": {
+      "url": "https://mcp.example.com/zendesk",
+      "description": "Support tickets and help center",
+      "overrides": {}
+    },
+    "analytics": {
+      "url": "https://mcp.example.com/analytics",
+      "description": "Product and web analytics",
+      "overrides": {}
+    },
+    "vuln-scanner": {
+      "url": "https://mcp.example.com/vuln-scanner",
+      "description": "Vulnerability and dependency scanning",
+      "overrides": {}
+    },
+    "contract-mgmt": {
+      "url": "https://mcp.example.com/contract-mgmt",
+      "description": "Contract lifecycle management",
+      "overrides": {}
+    }
+  }
+}

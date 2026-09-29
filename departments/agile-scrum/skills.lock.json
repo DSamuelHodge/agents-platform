@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "agile-scrum-playbook": {
+      "sha256": "990ec360e2ee38fbd1468e57ca84070939284310d0b5e040d1e7c71294c67bf3"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

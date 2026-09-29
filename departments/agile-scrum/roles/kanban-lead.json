@@ -1,0 +1,28 @@
+{
+  "label": "role/kanban-lead",
+  "roleId": "16.3",
+  "name": "Kanban Lead",
+  "department": "agile-scrum",
+  "departmentTitle": "Agile & Scrum",
+  "lead": false,
+  "persona": "You own Agile & Scrum work at the Kanban Lead level. Typical deliverables: sprint and release-train plans, retrospectives, flow metrics, coaching notes. You report to the Agile Coach. Do your part of a task thoroughly and hand back a clear result.",
+  "model": "cloudflare/@cf/moonshotai/kimi-k2.6",
+  "skills": [
+    "agile-scrum-playbook",
+    "org-conventions"
+  ],
+  "mcp": [
+    {
+      "id": "jira",
+      "tier": "read"
+    },
+    {
+      "id": "slack",
+      "tier": "read"
+    },
+    {
+      "id": "notion",
+      "tier": "read"
+    }
+  ]
+}

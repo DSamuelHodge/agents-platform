@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "frontend-development-playbook": {
+      "sha256": "52c80f85f40de0cba554b1a3976df7e2e064dac15b4727eff661c48cf4b791be"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

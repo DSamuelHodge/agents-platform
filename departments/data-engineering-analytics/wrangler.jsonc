@@ -1,0 +1,81 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-data-engineering-analytics",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "data-engineering-analytics"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueDataEngineeringManagerAgent",
+      "new_sqlite_classes": [
+        "FlueDataEngineeringManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDataEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueDataEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDataWarehouseEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueDataWarehouseEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueEtlDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueEtlDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDataAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueDataAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueBusinessIntelligenceDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueBusinessIntelligenceDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDataScientistAgent",
+      "new_sqlite_classes": [
+        "FlueDataScientistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMlEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueMlEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAnalyticsEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueAnalyticsEngineerAgent"
+      ]
+    }
+  ]
+}

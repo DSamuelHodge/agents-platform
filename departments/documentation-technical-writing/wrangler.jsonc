@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-documentation-technical-writing",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "documentation-technical-writing"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueDocumentationManagerAgent",
+      "new_sqlite_classes": [
+        "FlueDocumentationManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueTechnicalWriterAgent",
+      "new_sqlite_classes": [
+        "FlueTechnicalWriterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueApiDocumentationSpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueApiDocumentationSpecialistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueKnowledgeBaseManagerAgent",
+      "new_sqlite_classes": [
+        "FlueKnowledgeBaseManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueVideoTutorialCreatorAgent",
+      "new_sqlite_classes": [
+        "FlueVideoTutorialCreatorAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueInformationDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueInformationDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueContentStrategistAgent",
+      "new_sqlite_classes": [
+        "FlueContentStrategistAgent"
+      ]
+    }
+  ]
+}

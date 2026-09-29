@@ -1,0 +1,13 @@
+{
+  "name": "@org/harness",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@flue/runtime": "2.2.2",
+    "@org/policy-core": "*",
+    "hono": "^4.6.0",
+    "valibot": "^1.0.0"
+  }
+}

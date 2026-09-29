@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "project-management-playbook": {
+      "sha256": "4a7b3583ea81cc2579c2be40edb2e0a34dc9f3f805c73cef95f2ba6b5ad8bb55"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

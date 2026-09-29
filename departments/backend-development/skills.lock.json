@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "backend-development-playbook": {
+      "sha256": "628a3c8dc7b5a34ab6db1c87bc875f8eb22266dd5b955b6e62743f1726d27e96"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@org/dept-design",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "deploy": "vite build && wrangler deploy"
+  },
+  "dependencies": {
+    "@flue/runtime": "2.2.2",
+    "@org/harness": "*",
+    "@org/policy-core": "*",
+    "hono": "^4.6.0"
+  }
+}

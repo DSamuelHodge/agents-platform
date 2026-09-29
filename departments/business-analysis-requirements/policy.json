@@ -1,0 +1,33 @@
+{
+  "department": "business-analysis-requirements",
+  "title": "Business Analysis & Requirements",
+  "gatewayId": "dept-business-analysis-requirements",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "business-analysis-requirements-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "notion": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "google-drive": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "slack": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

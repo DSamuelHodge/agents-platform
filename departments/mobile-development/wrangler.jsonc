@@ -1,0 +1,69 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-mobile-development",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "mobile-development"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueMobileLeadAgent",
+      "new_sqlite_classes": [
+        "FlueMobileLeadAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueIosDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueIosDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueAndroidDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueAndroidDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueReactNativeDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueReactNativeDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueFlutterDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueFlutterDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMobileUiUxDeveloperAgent",
+      "new_sqlite_classes": [
+        "FlueMobileUiUxDeveloperAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMobileDevopsEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueMobileDevopsEngineerAgent"
+      ]
+    }
+  ]
+}

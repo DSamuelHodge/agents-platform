@@ -1,0 +1,32 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      departments: ${{ steps.list.outputs.departments }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install
+      # Vendored skills must match their locks; policy, generated code and gateway bundle must be current.
+      - run: node scripts/sync-skills.mjs --verify
+      - run: npm run check
+      - id: list
+        run: echo "departments=$(node scripts/list-departments.mjs)" >> "$GITHUB_OUTPUT"
+  build:
+    needs: check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        department: ${{ fromJSON(needs.check.outputs.departments) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install
+      - run: npm run build -w departments/${{ matrix.department }}
+      - run: npx wrangler deploy --dry-run
+        working-directory: departments/${{ matrix.department }}

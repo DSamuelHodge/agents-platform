@@ -1,0 +1,12 @@
+{
+  "source": "local checkout",
+  "commit": "local",
+  "skills": {
+    "mobile-development-playbook": {
+      "sha256": "383ff0a63e00f5a37ff62c02cff42a656454b05b34bf06cacf40cf6df5f7b4c6"
+    },
+    "org-conventions": {
+      "sha256": "cbdda401109aeaee561c30883327b62ea7b4c55c67a9c851aaf62a221c35f2e3"
+    }
+  }
+}

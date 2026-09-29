@@ -1,0 +1,37 @@
+{
+  "department": "devops-infrastructure",
+  "title": "DevOps & Infrastructure",
+  "gatewayId": "dept-devops-infrastructure",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "devops-infrastructure-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "cloudflare": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "pagerduty": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "agile-scrum": {
+    "binding": "DEPT_AGILE_SCRUM",
+    "roles": [
+      "agile-coach",
+      "scrum-master",
+      "kanban-lead",
+      "release-train-engineer",
+      "agile-transformation-lead"
+    ]
+  },
+  "backend-development": {
+    "binding": "DEPT_BACKEND_DEVELOPMENT",
+    "roles": [
+      "backend-lead-principal",
+      "backend-developer",
+      "api-developer",
+      "database-developer",
+      "microservices-developer",
+      "backend-performance-engineer",
+      "integration-developer"
+    ]
+  },
+  "business-analysis-requirements": {
+    "binding": "DEPT_BUSINESS_ANALYSIS_REQUIREMENTS",
+    "roles": [
+      "lead-business-analyst",
+      "business-analyst",
+      "systems-analyst",
+      "process-analyst",
+      "domain-expert-sme",
+      "requirements-engineer"
+    ]
+  },
+  "customer-support": {
+    "binding": "DEPT_CUSTOMER_SUPPORT",
+    "roles": [
+      "head-of-support",
+      "customer-support-rep-tier-1",
+      "technical-support-engineer-tier-2",
+      "senior-support-engineer-tier-3",
+      "support-operations-manager",
+      "community-manager",
+      "customer-advocate",
+      "onboarding-specialist",
+      "training-specialist"
+    ]
+  },
+  "data-engineering-analytics": {
+    "binding": "DEPT_DATA_ENGINEERING_ANALYTICS",
+    "roles": [
+      "data-engineering-manager",
+      "data-engineer",
+      "data-warehouse-engineer",
+      "etl-developer",
+      "data-analyst",
+      "business-intelligence-developer",
+      "data-scientist",
+      "ml-engineer",
+      "analytics-engineer"
+    ]
+  },
+  "design": {
+    "binding": "DEPT_DESIGN",
+    "roles": [
+      "design-director",
+      "ux-designer",
+      "ui-designer",
+      "interaction-designer",
+      "visual-designer",
+      "motion-designer",
+      "design-system-manager",
+      "prototyper"
+    ]
+  },
+  "devops-infrastructure": {
+    "binding": "DEPT_DEVOPS_INFRASTRUCTURE",
+    "roles": [
+      "devops-manager",
+      "devops-engineer",
+      "site-reliability-engineer-sre",
+      "cloud-engineer",
+      "platform-engineer",
+      "release-manager",
+      "infrastructure-engineer",
+      "ci-cd-engineer",
+      "configuration-manager",
+      "monitoring-observability-engineer"
+    ]
+  },
+  "documentation-technical-writing": {
+    "binding": "DEPT_DOCUMENTATION_TECHNICAL_WRITING",
+    "roles": [
+      "documentation-manager",
+      "technical-writer",
+      "api-documentation-specialist",
+      "knowledge-base-manager",
+      "video-tutorial-creator",
+      "information-developer",
+      "content-strategist"
+    ]
+  },
+  "frontend-development": {
+    "binding": "DEPT_FRONTEND_DEVELOPMENT",
+    "roles": [
+      "frontend-lead-principal",
+      "frontend-developer",
+      "javascript-typescript-developer",
+      "css-styling-specialist",
+      "frontend-performance-engineer",
+      "web-accessibility-developer",
+      "frontend-build-engineer"
+    ]
+  },
+  "full-stack-development": {
+    "binding": "DEPT_FULL_STACK_DEVELOPMENT",
+    "roles": [
+      "full-stack-lead",
+      "full-stack-developer",
+      "mean-mern-stack-developer",
+      "rapid-prototyper"
+    ]
+  },
+  "legal-compliance": {
+    "binding": "DEPT_LEGAL_COMPLIANCE",
+    "roles": [
+      "general-counsel",
+      "corporate-lawyer",
+      "privacy-officer",
+      "intellectual-property-attorney",
+      "compliance-manager",
+      "contract-manager",
+      "paralegal"
+    ]
+  },
+  "marketing": {
+    "binding": "DEPT_MARKETING",
+    "roles": [
+      "chief-marketing-officer",
+      "product-marketing-manager",
+      "content-marketing-manager",
+      "digital-marketing-specialist",
+      "growth-marketer",
+      "email-marketing-specialist",
+      "marketing-analyst",
+      "brand-manager",
+      "event-marketing-manager",
+      "partner-marketing-manager"
+    ]
+  },
+  "mobile-development": {
+    "binding": "DEPT_MOBILE_DEVELOPMENT",
+    "roles": [
+      "mobile-lead",
+      "ios-developer",
+      "android-developer",
+      "react-native-developer",
+      "flutter-developer",
+      "mobile-ui-ux-developer",
+      "mobile-devops-engineer"
+    ]
+  },
+  "product-management-strategy": {
+    "binding": "DEPT_PRODUCT_MANAGEMENT_STRATEGY",
+    "roles": [
+      "chief-product-officer",
+      "product-manager",
+      "associate-product-manager",
+      "product-owner",
+      "product-analyst",
+      "competitive-analyst",
+      "product-operations"
+    ]
+  },
+  "project-management": {
+    "binding": "DEPT_PROJECT_MANAGEMENT",
+    "roles": [
+      "program-manager",
+      "project-manager",
+      "technical-project-manager",
+      "delivery-manager",
+      "resource-manager",
+      "pmo-analyst",
+      "portfolio-manager"
+    ]
+  },
+  "quality-assurance-testing": {
+    "binding": "DEPT_QUALITY_ASSURANCE_TESTING",
+    "roles": [
+      "qa-manager",
+      "qa-engineer",
+      "manual-tester",
+      "test-automation-engineer",
+      "performance-tester",
+      "security-tester",
+      "mobile-qa-specialist",
+      "api-integration-tester",
+      "regression-tester",
+      "uat-coordinator"
+    ]
+  },
+  "sales": {
+    "binding": "DEPT_SALES",
+    "roles": [
+      "vp-of-sales",
+      "sales-development-rep-sdr",
+      "account-executive",
+      "enterprise-sales-rep",
+      "solutions-engineer-sales-engineer",
+      "customer-success-manager",
+      "account-manager",
+      "sales-operations-analyst",
+      "revenue-operations-manager"
+    ]
+  },
+  "security-compliance": {
+    "binding": "DEPT_SECURITY_COMPLIANCE",
+    "roles": [
+      "chief-information-security-officer",
+      "security-engineer",
+      "application-security-engineer",
+      "penetration-tester",
+      "security-analyst",
+      "compliance-officer",
+      "identity-access-manager",
+      "security-operations-analyst"
+    ]
+  },
+  "software-architecture": {
+    "binding": "DEPT_SOFTWARE_ARCHITECTURE",
+    "roles": [
+      "chief-architect",
+      "solutions-architect",
+      "application-architect",
+      "data-architect",
+      "cloud-architect",
+      "integration-architect",
+      "security-architect"
+    ]
+  },
+  "user-research-experience": {
+    "binding": "DEPT_USER_RESEARCH_EXPERIENCE",
+    "roles": [
+      "ux-research-lead",
+      "user-researcher",
+      "behavioral-analyst",
+      "accessibility-specialist",
+      "information-architect",
+      "usability-tester"
+    ]
+  }
+}

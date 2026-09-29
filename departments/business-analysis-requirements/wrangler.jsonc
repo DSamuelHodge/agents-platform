@@ -1,0 +1,63 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-business-analysis-requirements",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "business-analysis-requirements"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueLeadBusinessAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueLeadBusinessAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueBusinessAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueBusinessAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSystemsAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueSystemsAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueProcessAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueProcessAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueDomainExpertSmeAgent",
+      "new_sqlite_classes": [
+        "FlueDomainExpertSmeAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueRequirementsEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueRequirementsEngineerAgent"
+      ]
+    }
+  ]
+}

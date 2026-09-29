@@ -1,0 +1,75 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-security-compliance",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "security-compliance"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueChiefInformationSecurityOfficerAgent",
+      "new_sqlite_classes": [
+        "FlueChiefInformationSecurityOfficerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSecurityEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueSecurityEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueApplicationSecurityEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueApplicationSecurityEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePenetrationTesterAgent",
+      "new_sqlite_classes": [
+        "FluePenetrationTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSecurityAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueSecurityAnalystAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueComplianceOfficerAgent",
+      "new_sqlite_classes": [
+        "FlueComplianceOfficerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueIdentityAccessManagerAgent",
+      "new_sqlite_classes": [
+        "FlueIdentityAccessManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSecurityOperationsAnalystAgent",
+      "new_sqlite_classes": [
+        "FlueSecurityOperationsAnalystAgent"
+      ]
+    }
+  ]
+}

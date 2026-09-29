@@ -1,0 +1,28 @@
+{
+  "label": "role/manual-tester",
+  "roleId": "11.3",
+  "name": "Manual Tester",
+  "department": "quality-assurance-testing",
+  "departmentTitle": "Quality Assurance & Testing",
+  "lead": false,
+  "persona": "You own Quality Assurance & Testing work at the Manual Tester level. Typical deliverables: test plans, automated tests, defect reports, regression and UAT coverage reports. You report to the QA Manager. Do your part of a task thoroughly and hand back a clear result.",
+  "model": "cloudflare/@cf/moonshotai/kimi-k2.6",
+  "skills": [
+    "quality-assurance-testing-playbook",
+    "org-conventions"
+  ],
+  "mcp": [
+    {
+      "id": "github",
+      "tier": "read"
+    },
+    {
+      "id": "jira",
+      "tier": "read"
+    },
+    {
+      "id": "sentry",
+      "tier": "read"
+    }
+  ]
+}

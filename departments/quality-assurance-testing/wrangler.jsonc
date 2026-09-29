@@ -1,0 +1,87 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-quality-assurance-testing",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "services": [
+    {
+      "binding": "MCP_GATEWAY",
+      "service": "agents-mcp-gateway"
+    }
+  ],
+  "vars": {
+    "DEPARTMENT": "quality-assurance-testing"
+  },
+  "migrations": [
+    {
+      "tag": "flue-class-FlueQaManagerAgent",
+      "new_sqlite_classes": [
+        "FlueQaManagerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueQaEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueQaEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueManualTesterAgent",
+      "new_sqlite_classes": [
+        "FlueManualTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueTestAutomationEngineerAgent",
+      "new_sqlite_classes": [
+        "FlueTestAutomationEngineerAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FluePerformanceTesterAgent",
+      "new_sqlite_classes": [
+        "FluePerformanceTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueSecurityTesterAgent",
+      "new_sqlite_classes": [
+        "FlueSecurityTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueMobileQaSpecialistAgent",
+      "new_sqlite_classes": [
+        "FlueMobileQaSpecialistAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueApiIntegrationTesterAgent",
+      "new_sqlite_classes": [
+        "FlueApiIntegrationTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueRegressionTesterAgent",
+      "new_sqlite_classes": [
+        "FlueRegressionTesterAgent"
+      ]
+    },
+    {
+      "tag": "flue-class-FlueUatCoordinatorAgent",
+      "new_sqlite_classes": [
+        "FlueUatCoordinatorAgent"
+      ]
+    }
+  ]
+}

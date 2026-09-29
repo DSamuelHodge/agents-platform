@@ -1,0 +1,29 @@
+{
+  "department": "quality-assurance-testing",
+  "title": "Quality Assurance & Testing",
+  "gatewayId": "dept-quality-assurance-testing",
+  "models": {
+    "default": "cloudflare/@cf/moonshotai/kimi-k2.6",
+    "allowed": [
+      "cloudflare/@cf/moonshotai/kimi-k2.6"
+    ]
+  },
+  "skills": [
+    "quality-assurance-testing-playbook",
+    "org-conventions"
+  ],
+  "mcp": {
+    "github": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "jira": {
+      "maxTier": "write",
+      "deny": []
+    },
+    "sentry": {
+      "maxTier": "read",
+      "deny": []
+    }
+  }
+}
