@@ -1,4 +1,10 @@
-import { authorize, peekDepartment, verifyToken, type PolicyBundle } from '@org/policy-core';
+import {
+  authorize,
+  mcpTokenSecretName,
+  peekDepartment,
+  verifyToken,
+  type PolicyBundle,
+} from '@org/policy-core';
 import { filterToolsListBody } from './filter.ts';
 import bundleJson from './policy.generated.json' with { type: 'json' };
 
@@ -77,15 +83,19 @@ export default {
       return rpcError(msg.id, -32601, `method '${method}' is not available through the gateway`);
     }
 
-    // 4. Forward with the upstream credential, which only the gateway holds.
-    const secretName = `MCP_TOKEN_${serverId.toUpperCase().replace(/-/g, '_')}`;
+    // 4. Forward with the department×server credential. Only the gateway holds it.
+    const secretName = mcpTokenSecretName(claims.d, serverId);
     const headers = new Headers();
     for (const h of FORWARD_HEADERS) {
       const v = request.headers.get(h);
       if (v) headers.set(h, v);
     }
     const upstreamToken = env[secretName];
-    if (typeof upstreamToken === 'string') headers.set('authorization', `Bearer ${upstreamToken}`);
+    if (typeof upstreamToken !== 'string' || !upstreamToken) {
+      audit({ decision: 'deny', dept: claims.d, role: claims.r, server: serverId, reason: `missing ${secretName}` });
+      return rpcError(msg.id, -32003, `gateway has no credential ${secretName}`);
+    }
+    headers.set('authorization', `Bearer ${upstreamToken}`);
 
     const upstream = await fetch(server.url, { method: 'POST', headers, body: bodyText });
 

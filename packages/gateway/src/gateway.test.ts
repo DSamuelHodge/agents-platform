@@ -4,7 +4,11 @@ import { signToken } from '@org/policy-core';
 import gateway from './index.ts';
 
 const KEYS = { sales: 'k-sales', 'legal-compliance': 'k-legal' };
-const env = { DEPT_KEYS: JSON.stringify(KEYS), MCP_TOKEN_SALESFORCE: 'upstream-secret' };
+const env = {
+  DEPT_KEYS: JSON.stringify(KEYS),
+  MCP_TOKEN_SALES_SALESFORCE: 'sales-secret',
+  MCP_TOKEN_LEGAL_COMPLIANCE_CONTRACT_MGMT: 'legal-secret',
+};
 const TOOLS = ['get_account', 'list_leads', 'create_lead', 'delete_account'];
 
 let upstreamCalls: { auth: string | null; body: any }[] = [];
@@ -32,7 +36,23 @@ const rpc = (method: string, params?: object) => ({ jsonrpc: '2.0', id: 1, metho
 test('lead can call write-tier tools; upstream sees only the gateway-held credential', async () => {
   const res = await call('sales', 'role/vp-of-sales', 'salesforce', rpc('tools/call', { name: 'create_lead' }));
   assert.equal((await res.json()).result.ok, true);
-  assert.equal(upstreamCalls[0]!.auth, 'Bearer upstream-secret');
+  assert.equal(upstreamCalls[0]!.auth, 'Bearer sales-secret');
+});
+
+test('missing department×server secret does not fall back to a shared token', async () => {
+  const thin = { DEPT_KEYS: JSON.stringify(KEYS), MCP_TOKEN_SALESFORCE: 'shared-must-not-be-used' };
+  const token = await signToken({ d: 'sales', r: 'role/vp-of-sales', aud: 'mcp' }, KEYS.sales, 60);
+  const res = await gateway.fetch(
+    new Request('https://gw/mcp/salesforce', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+      body: JSON.stringify(rpc('tools/call', { name: 'get_account' })),
+    }),
+    thin,
+  );
+  const body = await res.json();
+  assert.match(body.error.message, /MCP_TOKEN_SALES_SALESFORCE/);
+  assert.equal(upstreamCalls.length, 0);
 });
 
 test('read-only role is denied writes and never reaches upstream', async () => {

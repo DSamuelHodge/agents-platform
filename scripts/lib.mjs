@@ -7,6 +7,8 @@ export const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 export const exists = (p) => fs.existsSync(p);
 export const pascal = (slug) => slug.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join('');
 export const upperSnake = (s) => s.toUpperCase().replace(/-/g, '_');
+export const mcpTokenSecretName = (department, serverId) =>
+  `MCP_TOKEN_${upperSnake(department)}_${upperSnake(serverId)}`;
 
 /** "10.2" sorts after "9.7". */
 const idKey = (id) => id.split('.').map(Number);

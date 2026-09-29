@@ -14,6 +14,8 @@ test('unclassified tools are admin, so they stay gated', () => {
   assert.equal(toolTier('get_account'), 'read');
   assert.equal(toolTier('create_lead'), 'write');
   assert.equal(toolTier('delete_account'), 'admin');
+  assert.equal(toolTier('getJiraIssue'), 'read');
+  assert.equal(toolTier('createLead'), 'write');
 });
 
 test('approval code compare is length-safe', async () => {

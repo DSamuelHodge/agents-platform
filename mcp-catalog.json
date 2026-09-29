@@ -1,5 +1,5 @@
 {
-  "_comment": "Official vendor Streamable HTTP MCP endpoints. The gateway still holds MCP_TOKEN_<ID> (or OAuth bearer) per server. Add tool overrides after a live tools/list. Tenant-specific Salesforce URL: replace with https://api.salesforce.com/platform/mcp/v1/d/{mydomain}/platform/sobject-all.",
+  "_comment": "Official vendor Streamable HTTP MCP endpoints. Gateway secret is MCP_TOKEN_<DEPT>_<ID>. Run node scripts/list-mcp-tools.mjs to draft overrides from a live tools/list. URLs are unconfirmed until that call returns tools. Tenant Salesforce: https://api.salesforce.com/platform/mcp/v1/d/{mydomain}/platform/sobject-all.",
   "servers": {
     "github": {
       "url": "https://api.githubcopilot.com/mcp/",
@@ -17,8 +17,8 @@
       "overrides": {}
     },
     "google-drive": {
-      "url": "https://mcp.googleapis.com/drive/v1",
-      "description": "Google Drive / Workspace files. Confirm against current Google Workspace MCP docs for your tenant.",
+      "url": "https://drivemcp.googleapis.com/mcp/v1",
+      "description": "Google Drive (Claude Drive connector host). OAuth; gateway uses a department service credential, not the end user.",
       "overrides": {}
     },
     "slack": {

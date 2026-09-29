@@ -131,16 +131,18 @@ for (const d of departments()) {
   services.push({ binding, service: `agents-${d.slug}` });
 }
 out.write('packages/router/src/departments.generated.json', json(registry));
-out.write('packages/router/wrangler.jsonc', json({
+const routerWr = 'packages/router/wrangler.jsonc';
+const routerPrev = exists(path.join(ROOT, routerWr)) ? readJson(path.join(ROOT, routerWr)) : {};
+out.write(routerWr, json({
   $schema: '../../node_modules/wrangler/config-schema.json',
   name: 'agents-router',
   main: 'src/index.ts',
   compatibility_date: '2026-06-01',
   compatibility_flags: ['nodejs_compat'],
-  // Attach a custom domain / route protected by your identity provider, then implement src/auth.ts.
-  workers_dev: false,
-  preview_urls: false,
+  workers_dev: routerPrev.workers_dev ?? false,
+  preview_urls: routerPrev.preview_urls ?? false,
   observability: { enabled: true },
+  ...(routerPrev.vars ? { vars: routerPrev.vars } : {}),
   services,
 }));
 

@@ -75,7 +75,9 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 - **Add a role:** add it to your map, add `roles/<slug>.json`, generate. A migration is appended automatically.
   **Never rename an agent function or remove a migration**: the function name is the Durable Object's storage identity.
 - **Add an MCP server:** add to `mcp-catalog.json`, run `tools/list` against it and add `overrides`, add to the
-  department `policy.json` `mcp` ceiling, grant it in role manifests, `wrangler secret put MCP_TOKEN_<ID> --name agents-mcp-gateway`.
+  department `policy.json` `mcp` ceiling, grant it in role manifests,
+  `wrangler secret put MCP_TOKEN_<DEPT>_<ID> --name agents-mcp-gateway`
+  (e.g. `MCP_TOKEN_SALES_SALESFORCE`). Then `npm run list-mcp-tools` to draft `overrides` from a live `tools/list`.
 - **Add a skill:** add to `agents-skills` (with a `skills.manifest.json` entry), list it in the department `policy.json`
   `skills` and in role manifests, `sync-skills`, `generate`.
 - **skills.sh:** there is no publish step; skills appear there via install telemetry. Set `DISABLE_TELEMETRY=1`
@@ -92,7 +94,8 @@ npm run check            # validate + staleness + tests. CI runs this and builds
    use `wrangler.jsonc` (with services) once the 20 department Workers exist. Until then deploy with
    `packages/router/wrangler.bootstrap.jsonc`.
 3. Create the 20 named AI Gateways: `CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… node scripts/create-ai-gateways.mjs`
-4. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set `MCP_TOKEN_<ID>` secrets.
+4. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set
+   `MCP_TOKEN_<DEPT>_<ID>` secrets (one upstream credential per department and catalog server).
    Legal, Security and Sales also get an `APPROVAL_CODE` secret; write-tier MCP stays unusable until
    `record_write_approval` is called with that code.
 
@@ -112,4 +115,4 @@ Live account work (this pass, account `Derrick Hodge Account`):
 - Router Access: `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev` 302 to Zero Trust (`zerothinking.cloudflareaccess.com`, aud `616e79a8…`).
 - `mcp-catalog.json` uses vendor Streamable HTTP URLs (GitHub, Atlassian, Notion, Slack, Figma, Sentry, Cloudflare, HubSpot, Salesforce, PagerDuty, Zendesk, Amplitude, Snyk Evo, DocuSign). Snowflake warehouse is a tenant template URL. Google Drive has no public hosted MCP we could resolve.
 
-Still needs you: department Workers (router full `wrangler.jsonc` service bindings), `MCP_TOKEN_<ID>` secrets, and a Google Drive / Snowflake tenant URL if you use those servers.
+Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Google Drive host is `https://drivemcp.googleapis.com/mcp/v1` (OAuth); Snowflake tenant URL. `npm run list-mcp-tools` drafts overrides once a `tools/list` succeeds.

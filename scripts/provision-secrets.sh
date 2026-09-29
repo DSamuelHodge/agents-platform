@@ -5,7 +5,9 @@
 # The gateway receives DEPT_KEYS (map of all departments); the router receives CALLER_KEYS.
 # A compromised department Worker can only ever forge its own department.
 # Deploy each Worker once before running this, or `wrangler secret put` will offer to create a draft.
-# Re-run to rotate. Upstream MCP credentials are separate: wrangler secret put MCP_TOKEN_<ID> --name agents-mcp-gateway
+# Re-run to rotate. Upstream MCP credentials are per department × server:
+#   wrangler secret put MCP_TOKEN_<DEPT>_<ID> --name agents-mcp-gateway
+# e.g. MCP_TOKEN_SALES_SALESFORCE, MCP_TOKEN_LEGAL_COMPLIANCE_CONTRACT_MGMT
 set -euo pipefail
 cd "$(dirname "$0")/.."
 DRY="${DRY_RUN:-0}"

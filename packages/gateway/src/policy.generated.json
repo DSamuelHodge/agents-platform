@@ -17,8 +17,8 @@
       "overrides": {}
     },
     "google-drive": {
-      "url": "https://mcp.googleapis.com/drive/v1",
-      "description": "Google Drive / Workspace files. Confirm against current Google Workspace MCP docs for your tenant.",
+      "url": "https://drivemcp.googleapis.com/mcp/v1",
+      "description": "Google Drive (Claude Drive connector host). OAuth; gateway uses a department service credential, not the end user.",
       "overrides": {}
     },
     "slack": {

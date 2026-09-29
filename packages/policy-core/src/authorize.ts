@@ -1,16 +1,56 @@
 import type { CatalogServer, PolicyBundle, Tier } from './types.ts';
 import { tierRank } from './types.ts';
 
-export const DEFAULT_READ = '^(get|list|search|read|describe|find|fetch|query|view)([_-]|$)';
-export const DEFAULT_WRITE =
-  '^(create|update|add|comment|post|send|edit|set|upload|append|move|assign|transition)([_-]|$)';
+export const DEFAULT_READ_VERBS = [
+  'get',
+  'list',
+  'search',
+  'read',
+  'describe',
+  'find',
+  'fetch',
+  'query',
+  'view',
+  'download',
+] as const;
+export const DEFAULT_WRITE_VERBS = [
+  'create',
+  'update',
+  'add',
+  'copy',
+  'comment',
+  'post',
+  'send',
+  'edit',
+  'set',
+  'upload',
+  'append',
+  'move',
+  'assign',
+  'transition',
+] as const;
+
+/** Kept for catalog `readPattern` / `writePattern` overrides. Verb + snake, kebab, or camelCase boundary. */
+export const DEFAULT_READ = `^(${DEFAULT_READ_VERBS.join('|')})(?:[_-]|[A-Z]|$)`;
+export const DEFAULT_WRITE = `^(${DEFAULT_WRITE_VERBS.join('|')})(?:[_-]|[A-Z]|$)`;
+
+/** First path segment of a snake, kebab, or camelCase tool name (`getJiraIssue` → `get`). */
+export function toolVerb(tool: string): string {
+  const snake = tool.replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_');
+  return (snake.split('_')[0] ?? '').toLowerCase();
+}
+
+function verbMatches(tool: string, verbs: readonly string[], pattern?: string): boolean {
+  if (pattern) return new RegExp(pattern).test(tool);
+  return (verbs as readonly string[]).includes(toolVerb(tool));
+}
 
 /** Classify a tool. Unknown verbs are `admin`: new/odd tools are denied until someone classifies them. */
 export function tierOf(server: CatalogServer, tool: string): Tier {
   const override = server.overrides?.[tool];
   if (override) return override;
-  if (new RegExp(server.readPattern ?? DEFAULT_READ, 'i').test(tool)) return 'read';
-  if (new RegExp(server.writePattern ?? DEFAULT_WRITE, 'i').test(tool)) return 'write';
+  if (verbMatches(tool, DEFAULT_READ_VERBS, server.readPattern)) return 'read';
+  if (verbMatches(tool, DEFAULT_WRITE_VERBS, server.writePattern)) return 'write';
   return 'admin';
 }
 

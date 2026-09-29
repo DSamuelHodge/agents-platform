@@ -5,3 +5,4 @@ dist
 .env*
 .flue-vite.wrangler.jsonc
 packages/live-probe/gateways.created.json
+mcp-catalog.overrides.draft.json
