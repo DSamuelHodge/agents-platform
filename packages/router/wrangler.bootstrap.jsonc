@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "agents-router",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "vars": {
+    "TEAM_DOMAIN": "https://zerothinking.cloudflareaccess.com",
+    "POLICY_AUD": "616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d",
+    "ACCESS_EMAIL_GROUPS": "{\"dshodge2020@outlook.com\":[\"admin\"],\"hodgedomain@gmail.com\":[\"admin\"]}"
+  }
+}

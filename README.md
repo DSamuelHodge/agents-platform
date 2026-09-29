@@ -84,9 +84,13 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 ## First deployment
 
 1. Fill `mcp-catalog.json`; create the 20 AI Gateways named in each `policy.json` (`dept-<slug>`) in the dashboard/IaC.
-2. Set router Access vars (`TEAM_DOMAIN`, `POLICY_AUD`) and the `ACCESS_EMAIL_GROUPS` JSON map
-   (`email` or Access service-token `common_name` → `admin` / `dept:<slug>` / `role:<slug>`).
-   Attach a custom domain to the router (`workers_dev: false`) and put the Access application in front of it.
+2. Router Access is live: team `https://zerothinking.cloudflareaccess.com`, application **Agents Router**
+   (`POLICY_AUD` `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`) in front of
+   `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev`.
+   Allowed: `dshodge2020@outlook.com`, `hodgedomain@gmail.com`, `*@hodgederrick.com`.
+   The Worker is currently deployed without department service bindings (those Workers are not on the account yet);
+   use `wrangler.jsonc` (with services) once the 20 department Workers exist. Until then deploy with
+   `packages/router/wrangler.bootstrap.jsonc`.
 3. Create the 20 named AI Gateways: `CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… node scripts/create-ai-gateways.mjs`
 4. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set `MCP_TOKEN_<ID>` secrets.
    Legal, Security and Sales also get an `APPROVAL_CODE` secret; write-tier MCP stays unusable until
@@ -105,4 +109,7 @@ Live account work (this pass, account `Derrick Hodge Account`):
 - Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` (request routed with gateway id `dept-sales`).
 - Deployed `agents-live-probe` on `*.dshodge2020.workers.dev`: HMAC MCP token sign/verify against a stub `tools/list`, forged key denied; same-isolate handoff analogue returned `ack:qualify ACME`.
 
-Still needs you: `wrangler login` (or `CLOUDFLARE_API_TOKEN` in this shell) to deploy the Flue `handoff-probe` Worker (`init`/`dispatch`/`read` with Durable Objects). It **builds**; it is not on the account yet. Router Access needs `TEAM_DOMAIN`, `POLICY_AUD`, and `ACCESS_EMAIL_GROUPS` before the router admits anyone.
+- Router Access: `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev` 302 to Zero Trust (`zerothinking.cloudflareaccess.com`, aud `616e79a8…`).
+- `mcp-catalog.json` uses vendor Streamable HTTP URLs (GitHub, Atlassian, Notion, Slack, Figma, Sentry, Cloudflare, HubSpot, Salesforce, PagerDuty, Zendesk, Amplitude, Snyk Evo, DocuSign). Snowflake warehouse is a tenant template URL. Google Drive has no public hosted MCP we could resolve.
+
+Still needs you: department Workers (router full `wrangler.jsonc` service bindings), `MCP_TOKEN_<ID>` secrets, and a Google Drive / Snowflake tenant URL if you use those servers.

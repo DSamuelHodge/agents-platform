@@ -2,83 +2,83 @@
   "version": 1,
   "catalog": {
     "github": {
-      "url": "https://mcp.example.com/github",
+      "url": "https://api.githubcopilot.com/mcp/",
       "description": "Source code, issues and pull requests",
       "overrides": {}
     },
     "jira": {
-      "url": "https://mcp.example.com/jira",
-      "description": "Issue and project tracking",
+      "url": "https://mcp.atlassian.com/v2/mcp",
+      "description": "Issue and project tracking (Atlassian Jira / Confluence)",
       "overrides": {}
     },
     "notion": {
-      "url": "https://mcp.example.com/notion",
+      "url": "https://mcp.notion.com/mcp",
       "description": "Docs and knowledge base",
       "overrides": {}
     },
     "google-drive": {
-      "url": "https://mcp.example.com/google-drive",
-      "description": "Files and shared documents",
+      "url": "https://mcp.googleapis.com/drive/v1",
+      "description": "Google Drive / Workspace files. Confirm against current Google Workspace MCP docs for your tenant.",
       "overrides": {}
     },
     "slack": {
-      "url": "https://mcp.example.com/slack",
+      "url": "https://mcp.slack.com/mcp",
       "description": "Team messaging",
       "overrides": {}
     },
     "figma": {
-      "url": "https://mcp.example.com/figma",
+      "url": "https://mcp.figma.com/mcp",
       "description": "Design files",
       "overrides": {}
     },
     "sentry": {
-      "url": "https://mcp.example.com/sentry",
+      "url": "https://mcp.sentry.dev/mcp",
       "description": "Error and performance monitoring",
       "overrides": {}
     },
     "cloudflare": {
-      "url": "https://mcp.example.com/cloudflare",
-      "description": "Cloudflare account resources",
+      "url": "https://mcp.cloudflare.com/mcp",
+      "description": "Cloudflare account resources (Code Mode API MCP)",
       "overrides": {}
     },
     "pagerduty": {
-      "url": "https://mcp.example.com/pagerduty",
+      "url": "https://mcp.pagerduty.com/mcp",
       "description": "Incident response and on-call",
       "overrides": {}
     },
     "warehouse": {
-      "url": "https://mcp.example.com/warehouse",
-      "description": "Analytics data warehouse",
+      "url": "https://org-account.snowflakecomputing.com/api/v2/databases/ANALYTICS/schemas/PUBLIC/mcp-servers/agents",
+      "description": "Snowflake-managed Cortex MCP. Replace org-account / ANALYTICS / PUBLIC / agents with your account URL, database, schema and MCP server name.",
       "overrides": {}
     },
     "hubspot": {
-      "url": "https://mcp.example.com/hubspot",
+      "url": "https://mcp.hubspot.com",
       "description": "Marketing automation and CRM",
       "overrides": {}
     },
     "salesforce": {
-      "url": "https://mcp.example.com/salesforce",
-      "description": "Sales CRM",
+      "url": "https://api.salesforce.com/platform/mcp/v1/platform/sobject-all",
+      "description": "Sales CRM (Salesforce hosted SObject All). Swap in the org My Domain URL if required.",
       "overrides": {}
     },
     "zendesk": {
-      "url": "https://mcp.example.com/zendesk",
+      "url": "https://mcp.zendesk.com/mcp",
       "description": "Support tickets and help center",
       "overrides": {}
     },
     "analytics": {
-      "url": "https://mcp.example.com/analytics",
+      "url": "https://mcp.amplitude.com/mcp",
       "description": "Product and web analytics",
       "overrides": {}
     },
     "vuln-scanner": {
-      "url": "https://mcp.example.com/vuln-scanner",
-      "description": "Vulnerability and dependency scanning",
+      "url": "https://evo.snyk.io/mcp",
+      "description": "Snyk Evo hosted MCP (AI inventory, risk, policy). Code scanning remains the local Snyk CLI MCP.",
       "overrides": {}
     },
     "contract-mgmt": {
-      "url": "https://mcp.example.com/contract-mgmt",
-      "description": "Contract lifecycle management",
+      "url": "https://mcp.docusign.com/mcp",
+      "description": "Contract lifecycle (DocuSign hosted MCP if enabled on the account)",
       "overrides": {}
     }
   },
