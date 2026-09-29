@@ -9,13 +9,13 @@
     "build-policy": "node scripts/build-policy.mjs",
     "build-policy:check": "node scripts/build-policy.mjs --check",
     "sync-skills": "node scripts/sync-skills.mjs",
+    "sync-mcp": "node scripts/sync-mcp.mjs",
     "create-gateways": "node scripts/create-ai-gateways.mjs",
-    "list-mcp-tools": "node scripts/list-mcp-tools.mjs",
     "put-mcp-tokens": "node scripts/put-mcp-tokens.mjs",
     "validate": "node scripts/validate.mjs",
     "test": "node --test --experimental-strip-types \"packages/*/src/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json --pretty false",
-    "check": "npm run validate && npm run generate:check && npm run build-policy:check && npm run typecheck && npm test"
+    "check": "npm run sync-mcp -- --verify && npm run validate && npm run generate:check && npm run build-policy:check && npm run typecheck && npm test"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.62.0",

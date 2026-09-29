@@ -1,7 +1,8 @@
 # agents-platform
 
 150 agent roles across 20 departments, built with [Flue](https://flueframework.com), deployed on Cloudflare
-(Workers, Durable Objects, Workers AI, AI Gateway). Skills live in a **separate repo** (`agents-skills`,
+(Workers, Durable Objects, Workers AI, AI Gateway). Skills live in a **separate repo** (`agents-skills`).
+The MCP catalog lives in **`agents-mcps`** and is vendored here by `sync-mcp` (`mcp-catalog.json` + `mcp-catalog.lock.json`).
 Agent Skills format, discoverable by `npx skills` / skills.sh). MCP access is brokered by a private gateway.
 
 Source of truth for identity: `role-label-map.source.json` (your map). Everything else is derived or validated against it.
@@ -35,7 +36,7 @@ MCP tools are classified into tiers `read < write < admin` by naming convention 
 `mcp-catalog.json`. **Unrecognised tool names are `admin`** (denied unless a department ceiling allows it),
 so a new or destructive tool is blocked until someone classifies it. Default verbs include `download` as
 **read** (a read-only role can pull Drive file bytes) and `copy` as **write**. Name-based tiers are a heuristic:
-review each live `tools/list` before `npm run list-mcp-tools -- --apply --reviewed`. See `docs/mcp-auth-modes.md`.
+review each live `tools/list` in `agents-mcps` before `npm run list-mcp-tools -- --apply --reviewed` there. Auth notes: `agents-mcps/docs/mcp-auth-modes.md`.
 
 Default least privilege: department leads (x.1 in your map) get the department ceiling; all other roles start
 `read`-only. Widen a role by editing its manifest; `validate` refuses anything above the department policy.
@@ -49,7 +50,7 @@ so every role runs inside its own grant. Delivery is at-least-once: make side ef
 
 ```
 role-label-map.source.json     your map (identity source of truth)
-mcp-catalog.json               MCP servers (REPLACE the placeholder URLs), tier overrides
+mcp-catalog.json               VENDORED from agents-mcps (locked in mcp-catalog.lock.json)
 departments/<slug>/
   policy.json                  ceiling: MCP servers+tier, skills, models, AI Gateway id
   roles/<role-slug>.json       ONE FILE PER ROLE: persona, model, skills, mcp grants, delegatesTo  (edit these)
@@ -76,10 +77,9 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 - **Edit a role:** change `departments/<d>/roles/<slug>.json`, then `npm run generate && npm run build-policy`.
 - **Add a role:** add it to your map, add `roles/<slug>.json`, generate. A migration is appended automatically.
   **Never rename an agent function or remove a migration**: the function name is the Durable Object's storage identity.
-- **Add an MCP server:** add to `mcp-catalog.json`, run `tools/list` against it and add `overrides`, add to the
-  department `policy.json` `mcp` ceiling, grant it in role manifests,
-  `wrangler secret put MCP_TOKEN_<DEPT>_<ID> --name agents-mcp-gateway`
-  (e.g. `MCP_TOKEN_SALES_SALESFORCE`). Then `npm run list-mcp-tools` to draft `overrides` from a live `tools/list`.
+- **Add an MCP server:** edit `agents-mcps` (`mcp-catalog.json`, `npm run list-mcp-tools`), pin it with
+  `npm run sync-mcp -- --source ../agents-mcps` (or `--ref <sha>`), then add it to the department `policy.json`
+  ceiling and role manifests. `wrangler secret put MCP_TOKEN_<DEPT>_<ID> --name agents-mcp-gateway`.
 - **Add a skill:** add to `agents-skills` (with a `skills.manifest.json` entry), list it in the department `policy.json`
   `skills` and in role manifests, `sync-skills`, `generate`.
 - **skills.sh:** there is no publish step; skills appear there via install telemetry. Set `DISABLE_TELEMETRY=1`
@@ -120,4 +120,4 @@ Live account work (this pass, account `Derrick Hodge Account`):
 - Router Access: `https://agents.hodgederrick.com` 302s to Zero Trust. Router `workers_dev` is false. Catalog `auth.header`/`auth.scheme` (Sentry `Sentry-Bearer`, PagerDuty `Token token=`). GitHub/Cloudflare tokens go on via `npm run put-mcp-tokens` once you mint scoped per-department credentials.
 - `mcp-catalog.json` uses vendor Streamable HTTP URLs. Drive host is `https://drivemcp.googleapis.com/mcp/v1`. See `docs/mcp-auth-modes.md` before any `MCP_TOKEN_*`.
 
-Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Google Drive host is `https://drivemcp.googleapis.com/mcp/v1` (OAuth); Snowflake tenant URL. `npm run list-mcp-tools` drafts overrides once a `tools/list` succeeds.
+Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Snowflake tenant URL. Tool-list drafts run in `agents-mcps`.
