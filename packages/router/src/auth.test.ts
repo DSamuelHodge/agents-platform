@@ -84,6 +84,62 @@ test('service token maps common_name', async () => {
   assert.equal(canInvoke(p, 'sales', 'account-executive'), false);
 });
 
+test('garbage JWT is rejected', async () => {
+  const { env } = await fixture();
+  assert.equal(
+    await authenticate(
+      new Request('https://router/', { headers: { 'cf-access-jwt-assertion': 'not-a-jwt' } }),
+      env,
+    ),
+    null,
+  );
+});
+
+test('expired JWT is rejected', async () => {
+  const { privateKey, env } = await fixture();
+  const jwt = await new SignJWT({ email: 'lead@example.com', sub: 'user-1' })
+    .setProtectedHeader({ alg: 'RS256', kid: 'test' })
+    .setIssuer(TEAM)
+    .setAudience(AUD)
+    .setIssuedAt(Math.floor(Date.now() / 1000) - 3600)
+    .setExpirationTime(Math.floor(Date.now() / 1000) - 60)
+    .sign(privateKey);
+  assert.equal(
+    await authenticate(new Request('https://router/', { headers: { 'cf-access-jwt-assertion': jwt } }), env),
+    null,
+  );
+});
+
+test('unmapped email has no groups and cannot invoke', async () => {
+  const { privateKey, env } = await fixture();
+  const jwt = await signedJwt(privateKey, { email: 'anyone@hodgederrick.com', sub: 'u2' });
+  const p = await authenticate(
+    new Request('https://router/', { headers: { 'cf-access-jwt-assertion': jwt } }),
+    env,
+  );
+  assert.ok(p);
+  assert.deepEqual(p.groups, []);
+  assert.equal(canInvoke(p, 'sales', 'vp-of-sales'), false);
+});
+
+test('JWT groups claim cannot grant admin', async () => {
+  const { privateKey, env } = await fixture();
+  env.ACCESS_EMAIL_GROUPS = '{}';
+  const jwt = await signedJwt(privateKey, {
+    email: 'spoof@hodgederrick.com',
+    sub: 'u3',
+    groups: ['admin', 'dept:sales'],
+  });
+  const p = await authenticate(
+    new Request('https://router/', { headers: { 'cf-access-jwt-assertion': jwt } }),
+    env,
+  );
+  assert.ok(p);
+  assert.deepEqual(p.groups, ['dept:sales']);
+  assert.equal(canInvoke(p, 'legal-compliance', 'general-counsel'), false);
+  assert.equal(canInvoke(p, 'sales', 'vp-of-sales'), true);
+});
+
 test('wrong audience is rejected', async () => {
   const { privateKey, env } = await fixture();
   const jwt = await new SignJWT({ email: 'lead@example.com', sub: 'user-1' })

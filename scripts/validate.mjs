@@ -67,6 +67,31 @@ for (const d of depts) {
   }
 }
 
+const ADMIN_EMAILS = new Set(['dshodge2020@outlook.com', 'hodgedomain@gmail.com']);
+const deptSlugs = new Set(depts.map((d) => d.slug));
+const roleSlugs = new Set(depts.flatMap((d) => d.roles.map((r) => r.slug)));
+const groupsPath = path.join(ROOT, 'access-email-groups.json');
+if (exists(groupsPath)) {
+  const groups = readJson(groupsPath);
+  for (const [email, gs] of Object.entries(groups)) {
+    if (!Array.isArray(gs)) {
+      err(`access-email-groups: '${email}' must map to an array`);
+      continue;
+    }
+    for (const g of gs) {
+      if (g === 'admin') {
+        if (!ADMIN_EMAILS.has(email.toLowerCase())) err(`access-email-groups: only ${[...ADMIN_EMAILS].join(', ')} may be admin (got '${email}')`);
+      } else if (g.startsWith('dept:')) {
+        const slug = g.slice(5);
+        if (!deptSlugs.has(slug)) err(`access-email-groups: unknown department '${slug}' for ${email}`);
+      } else if (g.startsWith('role:')) {
+        const slug = g.slice(5);
+        if (!roleSlugs.has(slug)) err(`access-email-groups: unknown role '${slug}' for ${email}`);
+      } else err(`access-email-groups: ${email} has unknown group '${g}'`);
+    }
+  }
+}
+
 if (errors.length) {
   console.error(`validate: ${errors.length} problem(s)`);
   for (const e of errors.slice(0, 40)) console.error('  - ' + e);

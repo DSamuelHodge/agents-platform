@@ -33,7 +33,9 @@ user/system ─► router ──(service binding + signed caller token)──►
 
 MCP tools are classified into tiers `read < write < admin` by naming convention plus explicit `overrides` in
 `mcp-catalog.json`. **Unrecognised tool names are `admin`** (denied unless a department ceiling allows it),
-so a new or destructive tool is blocked until someone classifies it.
+so a new or destructive tool is blocked until someone classifies it. Default verbs include `download` as
+**read** (a read-only role can pull Drive file bytes) and `copy` as **write**. Name-based tiers are a heuristic:
+review each live `tools/list` before `npm run list-mcp-tools -- --apply --reviewed`. See `docs/mcp-auth-modes.md`.
 
 Default least privilege: department leads (x.1 in your map) get the department ceiling; all other roles start
 `read`-only. Widen a role by editing its manifest; `validate` refuses anything above the department policy.
@@ -89,7 +91,10 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 2. Router Access is live: team `https://zerothinking.cloudflareaccess.com`, application **Agents Router**
    (`POLICY_AUD` `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`) in front of
    `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev`.
-   Allowed: `dshodge2020@outlook.com`, `hodgedomain@gmail.com`, `*@hodgederrick.com`.
+   Access allow-list is those two emails only (no `*@hodgederrick.com`).
+   `access-email-groups.json` is the Worker group map: those two addresses are `admin`;
+   everyone else must be listed as `dept:<slug>` and/or `role:<slug>`.
+   Access sits on the custom domain. `workers.dev` is JWT-only so a garbage assertion is a Worker 401, not an Access 302.
    The Worker is currently deployed without department service bindings (those Workers are not on the account yet);
    use `wrangler.jsonc` (with services) once the 20 department Workers exist. Until then deploy with
    `packages/router/wrangler.bootstrap.jsonc`.
@@ -112,7 +117,7 @@ Live account work (this pass, account `Derrick Hodge Account`):
 - Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` (request routed with gateway id `dept-sales`).
 - Deployed `agents-live-probe` on `*.dshodge2020.workers.dev`: HMAC MCP token sign/verify against a stub `tools/list`, forged key denied; same-isolate handoff analogue returned `ack:qualify ACME`.
 
-- Router Access: `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev` 302 to Zero Trust (`zerothinking.cloudflareaccess.com`, aud `616e79a8…`).
-- `mcp-catalog.json` uses vendor Streamable HTTP URLs (GitHub, Atlassian, Notion, Slack, Figma, Sentry, Cloudflare, HubSpot, Salesforce, PagerDuty, Zendesk, Amplitude, Snyk Evo, DocuSign). Snowflake warehouse is a tenant template URL. Google Drive has no public hosted MCP we could resolve.
+- Router Access: custom domain `https://agents.hodgederrick.com` 302s to Zero Trust. `workers.dev` is not in the Access app so the Worker verifies `Cf-Access-Jwt-Assertion` itself (garbage / wrong aud / expired → 401).
+- `mcp-catalog.json` uses vendor Streamable HTTP URLs. Drive host is `https://drivemcp.googleapis.com/mcp/v1`. See `docs/mcp-auth-modes.md` before any `MCP_TOKEN_*`.
 
 Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Google Drive host is `https://drivemcp.googleapis.com/mcp/v1` (OAuth); Snowflake tenant URL. `npm run list-mcp-tools` drafts overrides once a `tools/list` succeeds.

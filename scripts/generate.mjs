@@ -133,6 +133,11 @@ for (const d of departments()) {
 out.write('packages/router/src/departments.generated.json', json(registry));
 const routerWr = 'packages/router/wrangler.jsonc';
 const routerPrev = exists(path.join(ROOT, routerWr)) ? readJson(path.join(ROOT, routerWr)) : {};
+const emailGroups = exists(path.join(ROOT, 'access-email-groups.json'))
+  ? readJson(path.join(ROOT, 'access-email-groups.json'))
+  : {};
+const vars = { ...(routerPrev.vars ?? {}) };
+vars.ACCESS_EMAIL_GROUPS = JSON.stringify(emailGroups);
 out.write(routerWr, json({
   $schema: '../../node_modules/wrangler/config-schema.json',
   name: 'agents-router',
@@ -142,7 +147,7 @@ out.write(routerWr, json({
   workers_dev: routerPrev.workers_dev ?? false,
   preview_urls: routerPrev.preview_urls ?? false,
   observability: { enabled: true },
-  ...(routerPrev.vars ? { vars: routerPrev.vars } : {}),
+  vars,
   services,
 }));
 

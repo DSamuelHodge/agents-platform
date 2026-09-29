@@ -29,11 +29,16 @@ export function canInvoke(p: Principal, department: string, roleSlug: string): b
   );
 }
 
+const ADMIN = 'admin';
+
 function groupsFromPayload(payload: JWTPayload, env: AccessEnv): string[] {
   const out = new Set<string>();
   const claim = payload.groups;
   if (Array.isArray(claim)) {
-    for (const g of claim) if (typeof g === 'string') out.add(g);
+    for (const g of claim) {
+      // `admin` is never taken from the IdP claim; only ACCESS_EMAIL_GROUPS may grant it.
+      if (typeof g === 'string' && g !== ADMIN) out.add(g);
+    }
   }
   let map: Record<string, string[]> = {};
   try {
@@ -45,7 +50,7 @@ function groupsFromPayload(payload: JWTPayload, env: AccessEnv): string[] {
   const commonName = typeof payload.common_name === 'string' ? payload.common_name : '';
   const sub = typeof payload.sub === 'string' ? payload.sub : '';
   for (const key of [email, commonName, sub]) {
-    const extra = map[key];
+    const extra = map[key] ?? map[key.toLowerCase()];
     if (extra) for (const g of extra) out.add(g);
   }
   return [...out];

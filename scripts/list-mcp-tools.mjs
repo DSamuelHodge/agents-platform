@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // POST tools/list to each catalog server and draft mcp-catalog overrides for unclassified tools.
 //   node scripts/list-mcp-tools.mjs
-//   node scripts/list-mcp-tools.mjs --apply   merge draft overrides into mcp-catalog.json (admin-only; never invents read/write)
+//   node scripts/list-mcp-tools.mjs --apply --reviewed   merge draft overrides (admin placeholders only) after a human read the draft
 //
 // Auth: env MCP_TOKEN_<DEPT>_<SERVER> (preferred) or MCP_TOKEN_<SERVER>. Treat 401/403/405 as "host exists, list unconfirmed".
 import fs from 'node:fs';
@@ -21,6 +21,11 @@ function classify(server, tool) {
 }
 
 const apply = process.argv.includes('--apply');
+const reviewed = process.argv.includes('--reviewed');
+if (apply && !reviewed) {
+  console.error('list-mcp-tools: --apply requires --reviewed (read mcp-catalog.overrides.draft.json first)');
+  process.exit(1);
+}
 const catalogPath = path.join(ROOT, 'mcp-catalog.json');
 const catalog = readJson(catalogPath);
 const outPath = path.join(ROOT, 'mcp-catalog.overrides.draft.json');
