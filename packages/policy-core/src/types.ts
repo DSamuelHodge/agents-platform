@@ -2,10 +2,22 @@ export const TIERS = ['read', 'write', 'admin'] as const;
 export type Tier = (typeof TIERS)[number];
 export const tierRank = (t: Tier): number => TIERS.indexOf(t);
 
+export interface CatalogAuth {
+  /** Header name. Default `Authorization`. */
+  header?: string;
+  /**
+   * Credential prefix. Default `Bearer` → `Bearer <token>`.
+   * A scheme ending in `=` is concatenated (`Token token=` → `Token token=<token>`).
+   */
+  scheme?: string;
+}
+
 export interface CatalogServer {
   /** Upstream MCP endpoint (streamable HTTP). Only the gateway ever holds credentials for it. */
   url: string;
   description?: string;
+  /** How the gateway presents `MCP_TOKEN_<DEPT>_<ID>`. Default Authorization / Bearer. */
+  auth?: CatalogAuth;
   /** Regex source; tool names matching are `read`. */
   readPattern?: string;
   /** Regex source; tool names matching are `write`. Anything unmatched is `admin` (default-deny posture). */

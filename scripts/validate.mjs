@@ -8,7 +8,14 @@ const errors = [];
 const err = (m) => errors.push(m);
 
 const map = readJson(path.join(ROOT, 'role-label-map.source.json'));
-const catalog = readJson(path.join(ROOT, 'mcp-catalog.json')).servers;
+const catalogFile = readJson(path.join(ROOT, 'mcp-catalog.json'));
+const catalog = catalogFile.servers;
+for (const [id, s] of Object.entries(catalog ?? {})) {
+  if (s.auth) {
+    if (s.auth.header != null && typeof s.auth.header !== 'string') err(`catalog ${id}: auth.header must be a string`);
+    if (s.auth.scheme != null && typeof s.auth.scheme !== 'string') err(`catalog ${id}: auth.scheme must be a string`);
+  }
+}
 const depts = departments();
 
 // 1. inventory matches the map exactly

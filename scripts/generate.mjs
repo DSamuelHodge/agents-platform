@@ -144,7 +144,7 @@ out.write(routerWr, json({
   main: 'src/index.ts',
   compatibility_date: '2026-06-01',
   compatibility_flags: ['nodejs_compat'],
-  workers_dev: routerPrev.workers_dev ?? false,
+  workers_dev: false,
   preview_urls: routerPrev.preview_urls ?? false,
   observability: { enabled: true },
   vars,

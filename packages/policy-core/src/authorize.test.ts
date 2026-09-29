@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { authorize, tierOf } from './authorize.ts';
 import { mcpTokenSecretName } from './secrets.ts';
+import { upstreamAuthHeader } from './upstream-auth.ts';
 import type { PolicyBundle } from './types.ts';
 
 const bundle: PolicyBundle = {
@@ -48,6 +49,18 @@ test('role grant and department ceiling both apply', () => {
 test('upstream secret names are per department and server', () => {
   assert.equal(mcpTokenSecretName('sales', 'salesforce'), 'MCP_TOKEN_SALES_SALESFORCE');
   assert.equal(mcpTokenSecretName('legal-compliance', 'google-drive'), 'MCP_TOKEN_LEGAL_COMPLIANCE_GOOGLE_DRIVE');
+});
+
+test('upstream auth header schemes', () => {
+  assert.deepEqual(upstreamAuthHeader({}, 't'), { name: 'Authorization', value: 'Bearer t' });
+  assert.deepEqual(upstreamAuthHeader({ auth: { scheme: 'Sentry-Bearer' } }, 'st'), {
+    name: 'Authorization',
+    value: 'Sentry-Bearer st',
+  });
+  assert.deepEqual(upstreamAuthHeader({ auth: { scheme: 'Token token=' } }, 'pd'), {
+    name: 'Authorization',
+    value: 'Token token=pd',
+  });
 });
 
 test('cross-department and unknown identities are denied', () => {

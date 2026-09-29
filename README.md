@@ -94,7 +94,7 @@ npm run check            # validate + staleness + tests. CI runs this and builds
    Access allow-list is those two emails only (no `*@hodgederrick.com`).
    `access-email-groups.json` is the Worker group map: those two addresses are `admin`;
    everyone else must be listed as `dept:<slug>` and/or `role:<slug>`.
-   Access sits on the custom domain. `workers.dev` is JWT-only so a garbage assertion is a Worker 401, not an Access 302.
+   Access sits on the custom domain. Router `workers_dev` is false so there is no second hostname.
    The Worker is currently deployed without department service bindings (those Workers are not on the account yet);
    use `wrangler.jsonc` (with services) once the 20 department Workers exist. Until then deploy with
    `packages/router/wrangler.bootstrap.jsonc`.
@@ -117,7 +117,7 @@ Live account work (this pass, account `Derrick Hodge Account`):
 - Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` (request routed with gateway id `dept-sales`).
 - Deployed `agents-live-probe` on `*.dshodge2020.workers.dev`: HMAC MCP token sign/verify against a stub `tools/list`, forged key denied; same-isolate handoff analogue returned `ack:qualify ACME`.
 
-- Router Access: custom domain `https://agents.hodgederrick.com` 302s to Zero Trust. `workers.dev` is not in the Access app so the Worker verifies `Cf-Access-Jwt-Assertion` itself (garbage / wrong aud / expired → 401).
+- Router Access: `https://agents.hodgederrick.com` 302s to Zero Trust. Router `workers_dev` is false. Catalog `auth.header`/`auth.scheme` (Sentry `Sentry-Bearer`, PagerDuty `Token token=`). GitHub/Cloudflare tokens go on via `npm run put-mcp-tokens` once you mint scoped per-department credentials.
 - `mcp-catalog.json` uses vendor Streamable HTTP URLs. Drive host is `https://drivemcp.googleapis.com/mcp/v1`. See `docs/mcp-auth-modes.md` before any `MCP_TOKEN_*`.
 
 Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Google Drive host is `https://drivemcp.googleapis.com/mcp/v1` (OAuth); Snowflake tenant URL. `npm run list-mcp-tools` drafts overrides once a `tools/list` succeeds.

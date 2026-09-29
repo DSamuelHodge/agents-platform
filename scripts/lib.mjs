@@ -10,6 +10,13 @@ export const upperSnake = (s) => s.toUpperCase().replace(/-/g, '_');
 export const mcpTokenSecretName = (department, serverId) =>
   `MCP_TOKEN_${upperSnake(department)}_${upperSnake(serverId)}`;
 
+export function upstreamAuthHeader(server, credential) {
+  const name = server.auth?.header ?? 'Authorization';
+  const scheme = server.auth?.scheme ?? 'Bearer';
+  const value = /[=:]$/.test(scheme) ? `${scheme}${credential}` : `${scheme} ${credential}`;
+  return { name, value };
+}
+
 /** "10.2" sorts after "9.7". */
 const idKey = (id) => id.split('.').map(Number);
 export const byRoleId = (a, b) => {

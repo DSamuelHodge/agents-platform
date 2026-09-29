@@ -6,7 +6,7 @@
 // Auth: env MCP_TOKEN_<DEPT>_<SERVER> (preferred) or MCP_TOKEN_<SERVER>. Treat 401/403/405 as "host exists, list unconfirmed".
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, departments, json, mcpTokenSecretName, readJson, upperSnake } from './lib.mjs';
+import { ROOT, departments, json, mcpTokenSecretName, readJson, upperSnake, upstreamAuthHeader } from './lib.mjs';
 
 const READ = new Set(['get', 'list', 'search', 'read', 'describe', 'find', 'fetch', 'query', 'view', 'download']);
 const WRITE = new Set(['create', 'update', 'add', 'copy', 'comment', 'post', 'send', 'edit', 'set', 'upload', 'append', 'move', 'assign', 'transition']);
@@ -49,9 +49,12 @@ function tokenFor(serverId) {
   return null;
 }
 
-async function listTools(url, token) {
+async function listTools(url, token, server) {
   const headers = { 'content-type': 'application/json', accept: 'application/json' };
-  if (token) headers.authorization = `Bearer ${token}`;
+  if (token) {
+    const cred = upstreamAuthHeader(server, token);
+    headers[cred.name.toLowerCase()] = cred.value;
+  }
   const res = await fetch(url, {
     method: 'POST',
     headers,
@@ -75,7 +78,7 @@ for (const [id, server] of Object.entries(catalog.servers ?? {})) {
   let tools = [];
   let error;
   try {
-    const listed = await listTools(server.url, auth?.value);
+    const listed = await listTools(server.url, auth?.value, server);
     status = listed.status;
     const names = listed.body?.result?.tools?.map((t) => t.name).filter(Boolean);
     if (Array.isArray(names)) tools = names;

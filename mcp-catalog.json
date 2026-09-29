@@ -34,6 +34,7 @@
     "sentry": {
       "url": "https://mcp.sentry.dev/mcp",
       "description": "Error and performance monitoring",
+      "auth": { "header": "Authorization", "scheme": "Sentry-Bearer" },
       "overrides": {}
     },
     "cloudflare": {
@@ -44,6 +45,7 @@
     "pagerduty": {
       "url": "https://mcp.pagerduty.com/mcp",
       "description": "Incident response and on-call",
+      "auth": { "header": "Authorization", "scheme": "Token token=" },
       "overrides": {}
     },
     "warehouse": {

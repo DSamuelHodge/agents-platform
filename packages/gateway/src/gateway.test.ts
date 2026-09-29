@@ -3,11 +3,14 @@ import assert from 'node:assert/strict';
 import { signToken } from '@org/policy-core';
 import gateway from './index.ts';
 
-const KEYS = { sales: 'k-sales', 'legal-compliance': 'k-legal' };
+const KEYS = { sales: 'k-sales', 'legal-compliance': 'k-legal', 'devops-infrastructure': 'k-devops' };
 const env = {
   DEPT_KEYS: JSON.stringify(KEYS),
   MCP_TOKEN_SALES_SALESFORCE: 'sales-secret',
   MCP_TOKEN_LEGAL_COMPLIANCE_CONTRACT_MGMT: 'legal-secret',
+  MCP_TOKEN_DEVOPS_INFRASTRUCTURE_SENTRY: 'sentry-secret',
+  MCP_TOKEN_DEVOPS_INFRASTRUCTURE_PAGERDUTY: 'pd-secret',
+  MCP_TOKEN_DEVOPS_INFRASTRUCTURE_GITHUB: 'gh-secret',
 };
 const TOOLS = ['get_account', 'list_leads', 'create_lead', 'delete_account'];
 
@@ -32,6 +35,25 @@ async function call(dept: keyof typeof KEYS, role: string, server: string, rpc: 
   return gateway.fetch(req, env);
 }
 const rpc = (method: string, params?: object) => ({ jsonrpc: '2.0', id: 1, method, params });
+
+test('Sentry-Bearer and PagerDuty Token schemes are applied per catalog server', async () => {
+  const sentry = await call(
+    'devops-infrastructure',
+    'role/devops-manager',
+    'sentry',
+    rpc('tools/call', { name: 'get_issue' }),
+  );
+  assert.equal(sentry.status, 200);
+  assert.equal(upstreamCalls[0]!.auth, 'Sentry-Bearer sentry-secret');
+  const pd = await call(
+    'devops-infrastructure',
+    'role/devops-manager',
+    'pagerduty',
+    rpc('tools/call', { name: 'get_incident' }),
+  );
+  assert.equal(pd.status, 200);
+  assert.equal(upstreamCalls[1]!.auth, 'Token token=pd-secret');
+});
 
 test('lead can call write-tier tools; upstream sees only the gateway-held credential', async () => {
   const res = await call('sales', 'role/vp-of-sales', 'salesforce', rpc('tools/call', { name: 'create_lead' }));

@@ -1,6 +1,7 @@
 # Vendor MCP authentication modes
 
-Gateway secrets are `MCP_TOKEN_<DEPT>_<ID>` and today they are injected as `Authorization: Bearer …`.
+Gateway secrets are `MCP_TOKEN_<DEPT>_<ID>`. Catalog `auth: { header, scheme }` controls the upstream header
+(default `Authorization` / `Bearer`). Sentry uses `Sentry-Bearer`; PagerDuty API keys use `Token token=`.
 Do not put those secrets on the gateway until Access JWT verification and the email-to-group map are live.
 
 Where a vendor only offers per-user OAuth, a static bearer is not a substitute. Use a service account or token-exchange flow; actions then belong to that service identity.
@@ -34,4 +35,6 @@ Do not run `npm run list-mcp-tools -- --apply --reviewed` until a human has read
 |---|---|
 | GitHub PAT/App token, Cloudflare API token, Snowflake PAT, minted DocuSign access token, Atlassian service key (if enabled), HubSpot **local** private app | Notion hosted, Figma, Slack hosted, Google Drive hosted, Salesforce hosted, Amplitude hosted, Snyk Evo, HubSpot hosted, Sentry (`Sentry-Bearer`), PagerDuty API key (`Token token=`) |
 
-Until the gateway grows per-server `auth` (scheme + optional token exchange), do not store `MCP_TOKEN_*` for the OAuth-only hosts.
+OAuth-only hosted MCP (Notion, Slack, Figma, Drive, Salesforce, HubSpot, Amplitude, Snyk Evo) still needs a service identity, a small REST-backed MCP Worker, or stays off. Do not store `MCP_TOKEN_*` for those until that exists.
+
+Pilot engineering departments (GitHub + Cloudflare static tokens) before those vendors.

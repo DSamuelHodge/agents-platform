@@ -2,6 +2,7 @@ import {
   authorize,
   mcpTokenSecretName,
   peekDepartment,
+  upstreamAuthHeader,
   verifyToken,
   type PolicyBundle,
 } from '@org/policy-core';
@@ -95,7 +96,8 @@ export default {
       audit({ decision: 'deny', dept: claims.d, role: claims.r, server: serverId, reason: `missing ${secretName}` });
       return rpcError(msg.id, -32003, `gateway has no credential ${secretName}`);
     }
-    headers.set('authorization', `Bearer ${upstreamToken}`);
+    const cred = upstreamAuthHeader(server, upstreamToken);
+    headers.set(cred.name, cred.value);
 
     const upstream = await fetch(server.url, { method: 'POST', headers, body: bodyText });
 

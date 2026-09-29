@@ -10,5 +10,6 @@
   "observability": { "enabled": true }
   // Secrets (see scripts/provision-secrets.sh):
   //   DEPT_KEYS          JSON map { "<department>": "<hmac key>" }
-  //   MCP_TOKEN_<DEPT>_<ID>  upstream credential per department × catalog server (both uppercased, '-' -> '_')
+  //   MCP_TOKEN_<DEPT>_<ID>  upstream credential per department × catalog server
+  // Catalog `auth.header` / `auth.scheme` (default Authorization / Bearer) control how the secret is sent.
 }

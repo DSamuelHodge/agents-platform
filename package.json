@@ -11,6 +11,7 @@
     "sync-skills": "node scripts/sync-skills.mjs",
     "create-gateways": "node scripts/create-ai-gateways.mjs",
     "list-mcp-tools": "node scripts/list-mcp-tools.mjs",
+    "put-mcp-tokens": "node scripts/put-mcp-tokens.mjs",
     "validate": "node scripts/validate.mjs",
     "test": "node --test --experimental-strip-types \"packages/*/src/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json --pretty false",
