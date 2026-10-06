@@ -16,7 +16,7 @@ import { AnalyticsEngineer } from './analytics-engineer.ts';
 
 export function DataEngineeringManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_data_engineering_analytics_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"}] } as RoleManifest, skills: [skill_data_engineering_analytics_playbook, skill_org_conventions] },
     { team: {
       'data-engineer': { agent: DataEngineer, name: "Data Engineer" },
       'data-warehouse-engineer': { agent: DataWarehouseEngineer, name: "Data Warehouse Engineer" },

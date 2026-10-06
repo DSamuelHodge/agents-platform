@@ -14,7 +14,7 @@ import { ContentStrategist } from './content-strategist.ts';
 
 export function DocumentationManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_documentation_technical_writing_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"}] } as RoleManifest, skills: [skill_documentation_technical_writing_playbook, skill_org_conventions] },
     { team: {
       'technical-writer': { agent: TechnicalWriter, name: "Technical Writer" },
       'api-documentation-specialist': { agent: ApiDocumentationSpecialist, name: "API Documentation Specialist" },

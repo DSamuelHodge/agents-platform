@@ -17,7 +17,7 @@ import { MonitoringObservabilityEngineer } from './monitoring-observability-engi
 
 export function DevopsManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_devops_infrastructure_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"},{"id":"cloudflare","tier":"write"}] } as RoleManifest, skills: [skill_devops_infrastructure_playbook, skill_org_conventions] },
     { team: {
       'devops-engineer': { agent: DevopsEngineer, name: "DevOps Engineer" },
       'site-reliability-engineer-sre': { agent: SiteReliabilityEngineerSre, name: "Site Reliability Engineer (SRE)" },

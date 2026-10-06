@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function FullStackDeveloper() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_full_stack_development_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_full_stack_development_playbook, skill_org_conventions] },
   );
 }

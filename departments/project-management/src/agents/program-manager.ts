@@ -14,7 +14,7 @@ import { PortfolioManager } from './portfolio-manager.ts';
 
 export function ProgramManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_project_management_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_project_management_playbook, skill_org_conventions] },
     { team: {
       'project-manager': { agent: ProjectManager, name: "Project Manager" },
       'technical-project-manager': { agent: TechnicalProjectManager, name: "Technical Project Manager" },

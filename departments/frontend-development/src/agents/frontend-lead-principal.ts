@@ -14,7 +14,7 @@ import { FrontendBuildEngineer } from './frontend-build-engineer.ts';
 
 export function FrontendLeadPrincipal() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_frontend_development_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_frontend_development_playbook, skill_org_conventions] },
     { team: {
       'frontend-developer': { agent: FrontendDeveloper, name: "Frontend Developer" },
       'javascript-typescript-developer': { agent: JavascriptTypescriptDeveloper, name: "JavaScript/TypeScript Developer" },

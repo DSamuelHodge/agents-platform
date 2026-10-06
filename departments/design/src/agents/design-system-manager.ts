@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function DesignSystemManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_design_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_design_playbook, skill_org_conventions] },
   );
 }

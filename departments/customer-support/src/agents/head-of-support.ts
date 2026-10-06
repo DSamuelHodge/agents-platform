@@ -16,7 +16,7 @@ import { TrainingSpecialist } from './training-specialist.ts';
 
 export function HeadOfSupport() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_customer_support_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_customer_support_playbook, skill_org_conventions] },
     { team: {
       'customer-support-rep-tier-1': { agent: CustomerSupportRepTier1, name: "Customer Support Rep (Tier 1)" },
       'technical-support-engineer-tier-2': { agent: TechnicalSupportEngineerTier2, name: "Technical Support Engineer (Tier 2)" },

@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function ConfigurationManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_devops_infrastructure_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_devops_infrastructure_playbook, skill_org_conventions] },
   );
 }

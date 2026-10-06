@@ -14,7 +14,7 @@ import { ProductOperations } from './product-operations.ts';
 
 export function ChiefProductOfficer() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_product_management_strategy_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_product_management_strategy_playbook, skill_org_conventions] },
     { team: {
       'product-manager': { agent: ProductManager, name: "Product Manager" },
       'associate-product-manager': { agent: AssociateProductManager, name: "Associate Product Manager" },

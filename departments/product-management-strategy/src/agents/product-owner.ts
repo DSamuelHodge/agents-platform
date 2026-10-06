@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function ProductOwner() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_product_management_strategy_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_product_management_strategy_playbook, skill_org_conventions] },
   );
 }

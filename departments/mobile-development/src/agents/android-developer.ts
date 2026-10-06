@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function AndroidDeveloper() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_mobile_development_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"}] } as RoleManifest, skills: [skill_mobile_development_playbook, skill_org_conventions] },
   );
 }

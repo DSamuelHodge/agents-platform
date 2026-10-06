@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function RequirementsEngineer() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_business_analysis_requirements_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_business_analysis_requirements_playbook, skill_org_conventions] },
   );
 }

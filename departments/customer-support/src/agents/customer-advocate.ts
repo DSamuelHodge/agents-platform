@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function CustomerAdvocate() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_customer_support_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_customer_support_playbook, skill_org_conventions] },
   );
 }

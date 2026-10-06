@@ -12,7 +12,7 @@ import { AgileTransformationLead } from './agile-transformation-lead.ts';
 
 export function AgileCoach() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_agile_scrum_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_agile_scrum_playbook, skill_org_conventions] },
     { team: {
       'scrum-master': { agent: ScrumMaster, name: "Scrum Master" },
       'kanban-lead': { agent: KanbanLead, name: "Kanban Lead" },

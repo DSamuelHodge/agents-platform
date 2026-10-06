@@ -75,6 +75,7 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 ```
 
 - **Edit a role:** change `departments/<d>/roles/<slug>.json`, then `npm run generate && npm run build-policy`.
+- **MCP credentials:** role JSON lists every intended server. `generate` mounts only grants whose `MCP_TOKEN_<DEPT>_<ID>` is in `.env` or `mcp-tokens.present.json` (names only). Adding a password to `.env` / `put-mcp-tokens` and regenerating turns that server on; missing passwords are left off so the agent can boot.
 - **Add a role:** add it to your map, add `roles/<slug>.json`, generate. A migration is appended automatically.
   **Never rename an agent function or remove a migration**: the function name is the Durable Object's storage identity.
 - **Add an MCP server:** edit `agents-mcps` (`mcp-catalog.json`, `npm run list-mcp-tools`), pin it with

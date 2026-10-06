@@ -15,7 +15,7 @@ import { Prototyper } from './prototyper.ts';
 
 export function DesignDirector() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_design_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_design_playbook, skill_org_conventions] },
     { team: {
       'ux-designer': { agent: UxDesigner, name: "UX Designer" },
       'ui-designer': { agent: UiDesigner, name: "UI Designer" },

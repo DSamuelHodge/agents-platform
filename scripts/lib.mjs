@@ -10,6 +10,55 @@ export const upperSnake = (s) => s.toUpperCase().replace(/-/g, '_');
 export const mcpTokenSecretName = (department, serverId) =>
   `MCP_TOKEN_${upperSnake(department)}_${upperSnake(serverId)}`;
 
+/** Committed list of gateway secret *names* (never values). Role JSON stays complete. */
+export const PRESENT_TOKENS_FILE = 'mcp-tokens.present.json';
+
+/** KEY=VALUE lines; quoted values unwrapped. Does not expand ${} or export. */
+export function parseDotEnv(text) {
+  const out = {};
+  for (const line of String(text ?? '').split(/\r?\n/)) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    const i = t.indexOf('=');
+    if (i <= 0) continue;
+    const k = t.slice(0, i).trim();
+    let v = t.slice(i + 1).trim();
+    if (
+      (v.startsWith('"') && v.endsWith('"') && v.length >= 2) ||
+      (v.startsWith("'") && v.endsWith("'") && v.length >= 2)
+    ) {
+      v = v.slice(1, -1);
+    }
+    out[k] = v;
+  }
+  return out;
+}
+
+/**
+ * MCP_TOKEN_* names that have a non-empty value in env / .env, else the committed inventory.
+ * Values are never returned.
+ */
+export function collectPresentMcpTokenNames({ env = process.env, envFileText = null, present = [] } = {}) {
+  const fromLive = [];
+  const take = (obj) => {
+    for (const [k, v] of Object.entries(obj ?? {})) {
+      if (k.startsWith('MCP_TOKEN_') && typeof v === 'string' && v.trim()) fromLive.push(k);
+    }
+  };
+  take(env);
+  if (envFileText) take(parseDotEnv(envFileText));
+  const names = fromLive.length
+    ? fromLive
+    : (present ?? []).filter((n) => typeof n === 'string' && n.startsWith('MCP_TOKEN_'));
+  return [...new Set(names)].sort();
+}
+
+/** Role grants whose gateway secret is present. Unmounted servers stay in the role JSON. */
+export function mountedMcpGrants(department, grants, presentNames) {
+  const set = new Set(presentNames);
+  return (grants ?? []).filter((g) => set.has(mcpTokenSecretName(department, g.id)));
+}
+
 export function upstreamAuthHeader(server, credential) {
   const name = server.auth?.header ?? 'Authorization';
   const scheme = server.auth?.scheme ?? 'Bearer';

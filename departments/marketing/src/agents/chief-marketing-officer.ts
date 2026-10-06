@@ -17,7 +17,7 @@ import { PartnerMarketingManager } from './partner-marketing-manager.ts';
 
 export function ChiefMarketingOfficer() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_marketing_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_marketing_playbook, skill_org_conventions] },
     { team: {
       'product-marketing-manager': { agent: ProductMarketingManager, name: "Product Marketing Manager" },
       'content-marketing-manager': { agent: ContentMarketingManager, name: "Content Marketing Manager" },

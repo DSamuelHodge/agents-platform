@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function PerformanceTester() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_quality_assurance_testing_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"}] } as RoleManifest, skills: [skill_quality_assurance_testing_playbook, skill_org_conventions] },
   );
 }

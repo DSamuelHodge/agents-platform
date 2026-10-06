@@ -17,7 +17,7 @@ import { UatCoordinator } from './uat-coordinator.ts';
 
 export function QaManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_quality_assurance_testing_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"}] } as RoleManifest, skills: [skill_quality_assurance_testing_playbook, skill_org_conventions] },
     { team: {
       'qa-engineer': { agent: QaEngineer, name: "QA Engineer" },
       'manual-tester': { agent: ManualTester, name: "Manual Tester" },

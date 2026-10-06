@@ -11,7 +11,7 @@ import { RapidPrototyper } from './rapid-prototyper.ts';
 
 export function FullStackLead() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_full_stack_development_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_full_stack_development_playbook, skill_org_conventions] },
     { team: {
       'full-stack-developer': { agent: FullStackDeveloper, name: "Full Stack Developer" },
       'mean-mern-stack-developer': { agent: MeanMernStackDeveloper, name: "MEAN/MERN Stack Developer" },

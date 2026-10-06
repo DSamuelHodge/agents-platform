@@ -16,7 +16,7 @@ import { RevenueOperationsManager } from './revenue-operations-manager.ts';
 
 export function VpOfSales() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_sales_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_sales_playbook, skill_org_conventions] },
     { team: {
       'sales-development-rep-sdr': { agent: SalesDevelopmentRepSdr, name: "Sales Development Rep (SDR)" },
       'account-executive': { agent: AccountExecutive, name: "Account Executive" },

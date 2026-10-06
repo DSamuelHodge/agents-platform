@@ -13,7 +13,7 @@
     "create-gateways": "node scripts/create-ai-gateways.mjs",
     "put-mcp-tokens": "node scripts/put-mcp-tokens.mjs",
     "validate": "node scripts/validate.mjs",
-    "test": "node --test --experimental-strip-types \"packages/*/src/**/*.test.ts\"",
+    "test": "node --test --experimental-strip-types \"packages/*/src/**/*.test.ts\" scripts/lib.test.mjs",
     "typecheck": "tsc -p tsconfig.json --pretty false",
     "check": "npm run sync-mcp -- --verify && npm run validate && npm run generate:check && npm run build-policy:check && npm run typecheck && npm test"
   },

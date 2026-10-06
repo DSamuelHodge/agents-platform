@@ -14,7 +14,7 @@ import { MobileDevopsEngineer } from './mobile-devops-engineer.ts';
 
 export function MobileLead() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_mobile_development_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"write"}] } as RoleManifest, skills: [skill_mobile_development_playbook, skill_org_conventions] },
     { team: {
       'ios-developer': { agent: IosDeveloper, name: "iOS Developer" },
       'android-developer': { agent: AndroidDeveloper, name: "Android Developer" },

@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function KnowledgeBaseManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_documentation_technical_writing_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"}] } as RoleManifest, skills: [skill_documentation_technical_writing_playbook, skill_org_conventions] },
   );
 }

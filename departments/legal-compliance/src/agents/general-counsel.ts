@@ -14,7 +14,7 @@ import { Paralegal } from './paralegal.ts';
 
 export function GeneralCounsel() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_legal_compliance_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_legal_compliance_playbook, skill_org_conventions] },
     { team: {
       'corporate-lawyer': { agent: CorporateLawyer, name: "Corporate Lawyer" },
       'privacy-officer': { agent: PrivacyOfficer, name: "Privacy Officer" },

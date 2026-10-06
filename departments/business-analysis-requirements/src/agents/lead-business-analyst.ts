@@ -13,7 +13,7 @@ import { RequirementsEngineer } from './requirements-engineer.ts';
 
 export function LeadBusinessAnalyst() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_business_analysis_requirements_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_business_analysis_requirements_playbook, skill_org_conventions] },
     { team: {
       'business-analyst': { agent: BusinessAnalyst, name: "Business Analyst" },
       'systems-analyst': { agent: SystemsAnalyst, name: "Systems Analyst" },

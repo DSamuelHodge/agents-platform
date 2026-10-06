@@ -14,7 +14,7 @@ import { SecurityArchitect } from './security-architect.ts';
 
 export function ChiefArchitect() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_software_architecture_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_software_architecture_playbook, skill_org_conventions] },
     { team: {
       'solutions-architect': { agent: SolutionsArchitect, name: "Solutions Architect" },
       'application-architect': { agent: ApplicationArchitect, name: "Application Architect" },

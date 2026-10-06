@@ -15,7 +15,7 @@ import { SecurityOperationsAnalyst } from './security-operations-analyst.ts';
 
 export function ChiefInformationSecurityOfficer() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_security_compliance_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [{"id":"github","tier":"read"},{"id":"cloudflare","tier":"read"}] } as RoleManifest, skills: [skill_security_compliance_playbook, skill_org_conventions] },
     { team: {
       'security-engineer': { agent: SecurityEngineer, name: "Security Engineer" },
       'application-security-engineer': { agent: ApplicationSecurityEngineer, name: "Application Security Engineer" },

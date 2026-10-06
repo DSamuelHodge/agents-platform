@@ -8,6 +8,6 @@ import skill_org_conventions from '../skills/org-conventions/SKILL.md';
 
 export function PortfolioManager() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_project_management_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_project_management_playbook, skill_org_conventions] },
   );
 }

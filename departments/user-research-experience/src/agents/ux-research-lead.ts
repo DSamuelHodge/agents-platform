@@ -13,7 +13,7 @@ import { UsabilityTester } from './usability-tester.ts';
 
 export function UxResearchLead() {
   return useRole(
-    { manifest: manifest as RoleManifest, skills: [skill_user_research_experience_playbook, skill_org_conventions] },
+    { manifest: { ...manifest, mcp: [] } as RoleManifest, skills: [skill_user_research_experience_playbook, skill_org_conventions] },
     { team: {
       'user-researcher': { agent: UserResearcher, name: "User Researcher" },
       'behavioral-analyst': { agent: BehavioralAnalyst, name: "Behavioral Analyst" },
