@@ -62,7 +62,8 @@ packages/policy-core           tiers, authorize(), HMAC tokens (unit tested)
 packages/harness               useRole(), handoff tool, requireCaller()
 packages/gateway               MCP gateway Worker (+ policy.generated.json)
 packages/router                the only entry point
-scripts/                       generate, build-policy, sync-skills, validate, provision-secrets
+scripts/                       generate, build-policy, sync-skills, validate, provision-secrets, put-mcp-tokens
+mcp-tokens.present.json        names of MCP_TOKEN_* secrets that exist (never values)
 ```
 
 ## Daily workflow
@@ -86,39 +87,51 @@ npm run check            # validate + staleness + tests. CI runs this and builds
 - **skills.sh:** there is no publish step; skills appear there via install telemetry. Set `DISABLE_TELEMETRY=1`
   for anything internal. Treat third-party skills as untrusted prompt text: review, then vendor at a pinned ref.
 
-## First deployment
+## Layers
 
-1. Fill `mcp-catalog.json`; create the 20 AI Gateways named in each `policy.json` (`dept-<slug>`) in the dashboard/IaC.
-2. Router Access is live: team `https://zerothinking.cloudflareaccess.com`, application **Agents Router**
-   (`POLICY_AUD` `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`) in front of
-   `https://agents.hodgederrick.com` and `https://agents-router.dshodge2020.workers.dev`.
-   Access allow-list is those two emails only (no `*@hodgederrick.com`).
-   `access-email-groups.json` is the Worker group map: those two addresses are `admin`;
-   everyone else must be listed as `dept:<slug>` and/or `role:<slug>`.
-   Access sits on the custom domain. Router `workers_dev` is false so there is no second hostname.
-   The Worker is currently deployed without department service bindings (those Workers are not on the account yet);
-   use `wrangler.jsonc` (with services) once the 20 department Workers exist. Until then deploy with
-   `packages/router/wrangler.bootstrap.jsonc`.
-3. Create the 20 named AI Gateways: `CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… node scripts/create-ai-gateways.mjs`
-4. Deploy once (Actions → deploy), then `scripts/provision-secrets.sh` (`DRY_RUN=1` first), then set
-   `MCP_TOKEN_<DEPT>_<ID>` secrets (one upstream credential per department and catalog server).
-   Legal, Security and Sales also get an `APPROVAL_CODE` secret; write-tier MCP stays unusable until
-   `record_write_approval` is called with that code.
+Product goal: route work to the right department and escalate when needed. Status lives in `FINISH.md`.
+
+| # | Layer | Status |
+|---|---|---|
+| 1 | Agents can start and use tools | Boot works. Generate mounts only MCP servers with a present gateway secret. Live GitHub read through the router is proven. Cloudflare MCP read through the router is not. |
+| 2 | Agents know how to do real work | Not started. Playbooks are placeholders. |
+| 3 | Agents can pass work to other departments | Not built. Handoff is same-department only. |
+| 4 | Something decides who gets incoming work | Not built. |
+
+## Live deployment
+
+Public hostname: `https://agents.hodgederrick.com` (Access team `https://zerothinking.cloudflareaccess.com`,
+application **Agents Router**, `POLICY_AUD` `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`).
+Allow-list is `dshodge2020@outlook.com` and `hodgedomain@gmail.com` only (no `*@hodgederrick.com`).
+`access-email-groups.json` is the Worker group map: those two addresses are `admin`; everyone else must be
+listed as `dept:<slug>` and/or `role:<slug>`. Router `workers_dev` is false. There is no workers.dev hostname
+and no service-token path.
+
+All 20 `agents-<slug>` Workers, `agents-mcp-gateway`, and `agents-router` (full `wrangler.jsonc` service
+bindings) are deployed. HMAC `DEPT_KEY` / `CALLER_KEY` maps are on the Workers. Named AI Gateways
+`dept-<slug>` exist. Legal, Security and Sales have `APPROVAL_CODE`; write-tier MCP stays unusable until
+`record_write_approval` is called with that code.
+
+`packages/router/wrangler.bootstrap.jsonc` stays in the repo for a first-time account with no department
+Workers. Do not use it on this account.
+
+Redeploy a department from its directory: `npm run deploy` (`vite build && wrangler deploy`). After role or
+token-inventory edits: `npm run generate && npm run build-policy`, then deploy the departments that changed.
 
 ## Verified vs not
 
 Verified locally: all 20 Workers build with Flue 2.2.2 + Vite 8 + the Cloudflare plugin (150 DO classes,
-bindings match migrations); `wrangler deploy --dry-run` passes for departments, gateway and router; unit and
-gateway integration tests (cross-department, privilege, forged-token, unclassified-tool, Access JWT, write-approval
-gate); `validate` rejects out-of-policy manifests; `tsc` type-checks `useRole` and `requireCaller`; skills repo lints.
+bindings match migrations); unit and gateway integration tests (cross-department, privilege, forged-token,
+unclassified-tool, Access JWT, write-approval gate, MCP present-token filter); `validate` rejects
+out-of-policy manifests; `tsc` type-checks `useRole` and `requireCaller`; skills repo lints.
 
-Live account work (this pass, account `Derrick Hodge Account`):
+Live (account `Derrick Hodge Account`):
 
-- Created all 20 named AI Gateways (`dept-agile-scrum` … `dept-user-research-experience`).
-- Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` (request routed with gateway id `dept-sales`).
-- Deployed `agents-live-probe` on `*.dshodge2020.workers.dev`: HMAC MCP token sign/verify against a stub `tools/list`, forged key denied; same-isolate handoff analogue returned `ack:qualify ACME`.
+- 20 named AI Gateways; Workers AI `@cf/moonshotai/kimi-k2.6` returned `pong` via `dept-sales`.
+- `https://agents.hodgederrick.com` 302s unauthenticated traffic to Zero Trust.
+- Catalog `auth.header`/`auth.scheme` (Sentry `Sentry-Bearer`, PagerDuty `Token token=`).
+- Ten GitHub and six Cloudflare `MCP_TOKEN_<DEPT>_<ID>` secrets on the gateway (names in `mcp-tokens.present.json`).
+- Admin GitHub read through Access → router → backend-development → gateway (`get_file_contents` listed repo files including `FINISH.md`).
+- `mcp-catalog.json` uses vendor Streamable HTTP URLs. Drive host is `https://drivemcp.googleapis.com/mcp/v1`. See `agents-mcps/docs/mcp-auth-modes.md` before any new `MCP_TOKEN_*`.
 
-- Router Access: `https://agents.hodgederrick.com` 302s to Zero Trust. Router `workers_dev` is false. Catalog `auth.header`/`auth.scheme` (Sentry `Sentry-Bearer`, PagerDuty `Token token=`). GitHub/Cloudflare tokens go on via `npm run put-mcp-tokens` once you mint scoped per-department credentials.
-- `mcp-catalog.json` uses vendor Streamable HTTP URLs. Drive host is `https://drivemcp.googleapis.com/mcp/v1`. See `docs/mcp-auth-modes.md` before any `MCP_TOKEN_*`.
-
-Still needs you: department Workers (router full `wrangler.jsonc` service bindings); `MCP_TOKEN_<DEPT>_<ID>` secrets (OAuth vendors need a service-account token, not a user login); Snowflake tenant URL. Tool-list drafts run in `agents-mcps`.
+Still open: Cloudflare MCP read through the live router; OAuth-only vendors (no broker, so no `MCP_TOKEN_*` and generate leaves them unmounted); Snowflake tenant URL; tool-list drafts in `agents-mcps`; layers 2–4 in `FINISH.md`.

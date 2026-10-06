@@ -1,161 +1,54 @@
 # Finish the agents-platform rollout
 
-This is the remaining work. The catalog split, Access JWT check, admin map, per-server auth schemes, and `workers_dev: false` on the router are already done. Do these steps in order. Do not invent a shared token and copy it onto every department.
+Run commands from `C:\Users\Derrick\Downloads\agents-platform\agents-platform` unless a step says otherwise. On this machine use `npm.cmd`. PowerShell does not accept `&&`. `npx.ps1` is blocked by execution policy; use `npm.cmd exec -- wrangler ...`. Do not paste secret values into chat.
 
-Run commands from `C:\Users\Derrick\Downloads\agents-platform\agents-platform` unless a step says otherwise. On this machine use `npm.cmd`. PowerShell does not accept `&&`. `npx.ps1` is blocked by execution policy; use `npm.cmd exec -- wrangler ...`.
+Account: `6c2dbbe47de58a74542ad9a5d9dd5b2b` (Derrick Hodge Account). Public hostname: `https://agents.hodgederrick.com`. Access team: `https://zerothinking.cloudflareaccess.com`. `POLICY_AUD`: `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`.
 
-Account: `6c2dbbe47de58a74542ad9a5d9dd5b2b` (Derrick Hodge Account), email `dshodge2020@outlook.com`.
+The catalog split, Access JWT check, admin map, per-server auth schemes, `workers_dev: false`, HMAC maps, twenty department Workers, the gateway, the full router, GitHub/Cloudflare `MCP_TOKEN_*` names, and generate-time MCP mounting are already done.
 
-The connected Cloudflare session can read the account. It returns **9109** on `/user/tokens`, so it cannot create API tokens. The GitHub connection cannot create personal access tokens. Those two clicks stay in the dashboards.
+## Layers and status
 
-## 1. Mint the pilot credentials
+Work is routed to the right department and escalated when needed. That has four layers. Each layer needs the one before it.
 
-Create **six separate secrets**. One GitHub fine-grained PAT and one Cloudflare API token per pilot department: backend, frontend, devops.
+| # | Layer | Status |
+|---|---|---|
+| 1 | Agents can start and use tools | **Done for boot.** Generate mounts only MCP grants whose `MCP_TOKEN_<DEPT>_<ID>` is in `.env` or `mcp-tokens.present.json` (names only). Role JSON stays complete. All 20 department Workers are deployed with that filter. A live GitHub read through Access → router HMAC → department Worker → gateway succeeded (`get_file_contents` on `DSamuelHodge/agents-platform`, including `FINISH.md`). Cloudflare MCP read through the same path is still unproven. Unauthenticated hits still 302 at Access (not a Worker 401). |
+| 2 | Agents know how to do real work | **Not started.** All 20 department playbooks are placeholder text in `agents-skills`. |
+| 3 | Agents can pass work to other departments | **Not built.** `handoff` only reaches teammates in the same department Worker. |
+| 4 | Something decides who gets incoming work | **Not built.** No triage agent or inbound router that picks a department. |
 
-Do not paste the secret values into chat. Set them only in the shell you will use for `put-mcp-tokens`.
+Do not start layer 2 until layer 1 stays green (`npm.cmd run check`, agents boot, GitHub read still works). Do not invent a shared token and copy it onto every department.
 
-### GitHub
+## Done (keep these true)
 
-For each department, open https://github.com/settings/personal-access-tokens/new (fine-grained, not classic).
+1. **Pilot and widened GitHub/Cloudflare secrets** live on `agents-mcp-gateway` as `MCP_TOKEN_<DEPT>_<ID>`. Inventory of *names* (never values) is `mcp-tokens.present.json`. Today that is 10 GitHub + 6 Cloudflare department tokens. Isolation is one secret name per department×server; GitHub PATs still share the same 56-repo surface until those PATs are repo-sliced.
+2. **Gateway, 20 department Workers, and `agents-router`** (full `wrangler.jsonc` service bindings) are deployed. Department deploy is `npm run deploy` from `departments/<slug>` (`vite build && wrangler deploy`). Router: `npm.cmd exec -- wrangler deploy --config packages/router/wrangler.jsonc`.
+3. **HMAC:** distinct `DEPT_KEY` / `CALLER_KEY` per department; `DEPT_KEYS` on the gateway; `CALLER_KEYS` on the router; `APPROVAL_CODE` on legal, security, and sales.
+4. **Access:** application **Agents Router** allows only `dshodge2020@outlook.com` and `hodgedomain@gmail.com`. No service-token path on the router. `access-email-groups.json` is the Worker map (those two are `admin`).
+5. **Generate filter:** `scripts/generate.mjs` writes `{ ...manifest, mcp: <mounted only> }`. Missing Jira/Sentry/OAuth hosts do not connect at boot. Adding a password to `.env`, `npm.cmd run put-mcp-tokens`, `npm.cmd run generate`, and redeploying that department turns the server on.
+6. **Step-6 GitHub proof:** conversation `step6-d` completed through the live router. Temporary Access Service Auth / role JSON edits used for that probe were reverted.
 
-- Name it `agents-<department>-github`, for example `agents-backend-development-github`.
-- Resource owner: `DSamuelHodge`.
-- Repository access: only the repos that department should read or change. For the first live read, Contents: Read is enough. Add Contents: Write later only for departments whose role grant is `write`.
-- No account-wide Administration permission.
+## Remaining on layer 1
 
-Save the token once. GitHub will not show it again.
+- Prove one Cloudflare MCP read through the router for a department that has `MCP_TOKEN_*_CLOUDFLARE` (frontend, devops, backend, full-stack, security, or architecture). Expect a real tools/list or read, not `-32003` and not upstream 401.
+- Unauthenticated `https://agents.hodgederrick.com` still 302s to Access. A request that reaches the Worker with no JWT must 401. Do not add a Service Auth hole to make curl easier.
+- Optional: slice GitHub PATs so each department sees only its repos. Names are already isolated.
 
-### Cloudflare
+## Layer 2 (next after layer 1 stays green)
 
-For each department, open https://dash.cloudflare.com/profile/api-tokens and create a **Custom token**. Do not use the Global API Key, and do not reuse the Wrangler OAuth login.
+Replace the 20 placeholder playbooks in `agents-skills` with real operating procedures, pin with `npm.cmd run sync-skills`, then `npm.cmd run generate` and redeploy the departments that changed.
 
-- Name it `agents-<department>-cloudflare`.
-- Account resources: only account `6c2dbbe47de58a74542ad9a5d9dd5b2b`.
-- Permissions: only what that department should call through `https://mcp.cloudflare.com/mcp`. Start with read permissions (account and Workers read). Add edit permissions later only where `departments/<slug>/policy.json` grants `cloudflare` write.
-- The token that creates other API tokens needs **API Tokens Write**. The current MCP login does not have that, which is why this step is manual.
+## Layer 3
 
-### Environment variable names
+Cross-department handoff (a lead in one Worker dispatching to a role in another) is not in the harness. Same-department `handoff` already exists.
 
-```text
-MCP_TOKEN_BACKEND_DEVELOPMENT_GITHUB
-MCP_TOKEN_FRONTEND_DEVELOPMENT_GITHUB
-MCP_TOKEN_DEVOPS_INFRASTRUCTURE_GITHUB
-MCP_TOKEN_BACKEND_DEVELOPMENT_CLOUDFLARE
-MCP_TOKEN_FRONTEND_DEVELOPMENT_CLOUDFLARE
-MCP_TOKEN_DEVOPS_INFRASTRUCTURE_CLOUDFLARE
-```
+## Layer 4
 
-PowerShell, for the current window only:
+Inbound triage: something that reads a request and chooses `department` + `role`. The public router today requires the caller to name both in the path.
 
-```powershell
-$env:MCP_TOKEN_BACKEND_DEVELOPMENT_GITHUB = '<paste>'
-# repeat for the other five
-```
+## People (when you need them)
 
-## 2. Put those six secrets on the gateway
-
-The Worker `agents-mcp-gateway` does not exist yet. Deploy it once so `secret put` has a script to attach to. It stays private (`workers_dev: false`). It will reject calls until `DEPT_KEYS` exists (step 5). That is expected.
-
-```powershell
-npm.cmd exec -- wrangler deploy --config packages/gateway/wrangler.jsonc
-$env:DRY_RUN = '1'
-npm.cmd run put-mcp-tokens -- github,cloudflare
-Remove-Item Env:DRY_RUN
-npm.cmd run put-mcp-tokens -- github,cloudflare
-```
-
-Dry-run must print the six pilot names as set, and the other GitHub and Cloudflare department names as `(env unset)`. The real run must print `set MCP_TOKEN_... on agents-mcp-gateway` for the six only. A missing env var fails the script. Do not export the other departments' names yet.
-
-Confirm names only (values are not listed):
-
-```powershell
-npm.cmd exec -- wrangler secret list --name agents-mcp-gateway
-```
-
-## 3. Deploy the twenty department Workers
-
-Each department Worker is `agents-<slug>` and binds to the gateway. Deploy all of them before the full router config. From the repo root, one department at a time:
-
-```powershell
-npm.cmd run deploy -w departments/backend-development
-npm.cmd run deploy -w departments/frontend-development
-npm.cmd run deploy -w departments/devops-infrastructure
-```
-
-Then the other seventeen: agile-scrum, business-analysis-requirements, customer-support, data-engineering-analytics, design, documentation-technical-writing, full-stack-development, legal-compliance, marketing, mobile-development, product-management-strategy, project-management, quality-assurance-testing, sales, security-compliance, software-architecture, user-research-experience.
-
-`wrangler deploy` for a department runs `vite build` first. If a deploy fails on a missing gateway binding, the gateway from step 2 must already exist.
-
-## 4. Generate HMAC keys
-
-`scripts/provision-secrets.sh` creates a distinct `DEPT_KEY` and `CALLER_KEY` per department Worker, writes the map `DEPT_KEYS` onto `agents-mcp-gateway`, writes `CALLER_KEYS` onto `agents-router`, and writes `APPROVAL_CODE` onto `agents-legal-compliance`, `agents-security-compliance`, and `agents-sales`.
-
-The script is bash and uses `openssl`. Run it from Git Bash or WSL, not from PowerShell:
-
-```bash
-DRY_RUN=1 bash scripts/provision-secrets.sh
-bash scripts/provision-secrets.sh
-```
-
-Re-running rotates every key. After a rotation, department Workers and the router must be called with the new secrets already stored (the script writes them). Keep the printed `APPROVAL_CODE` values somewhere you control. Write-tier MCP for legal, security, and sales stays blocked until `record_write_approval` is called with that code.
-
-## 5. Redeploy the router with service bindings
-
-The live router was deployed from `packages/router/wrangler.bootstrap.jsonc` because the department Workers did not exist. After step 3 and step 4:
-
-```powershell
-npm.cmd exec -- wrangler deploy --config packages/router/wrangler.jsonc
-```
-
-Leave `packages/router/wrangler.bootstrap.jsonc` in the repo. Do not turn `workers_dev` back on. The only public hostname is `https://agents.hodgederrick.com`. Access application **Agents Router** (`POLICY_AUD` `616e79a89317c4299483101242cf4e34c5dbc5cca482b652763f761a8ccf5a7d`) already allows only `dshodge2020@outlook.com` and `hodgedomain@gmail.com`.
-
-## 6. Prove one read through the gateway
-
-`agents-mcp-gateway` has no public URL. The proof goes through the router as an admin user.
-
-1. Sign in to Cloudflare Access as `dshodge2020@outlook.com` or `hodgedomain@gmail.com` at `https://agents.hodgederrick.com`.
-2. Call a backend role that is granted GitHub read, for example `POST /backend-development/<role>/run` with a prompt that only lists or reads a file in a repo that the backend PAT can see.
-3. Confirm the gateway reached GitHub: a real file listing or file body, not a JSON-RPC error `-32003` (missing secret) and not an upstream 401.
-4. Repeat one Cloudflare read with the frontend or devops token (something the token's read permissions allow).
-5. Confirm a department that has no Cloudflare grant cannot call Cloudflare, and a call with no `Cf-Access-Jwt-Assertion` still returns 401.
-
-Do not run `list-mcp-tools --apply`. Tool-name overrides stay in `agents-mcps` and are reviewed by hand.
-
-## 7. Widen GitHub and Cloudflare only after the pilot read works
-
-Same minting rules as step 1. One token per department. Then `npm.cmd run put-mcp-tokens -- github,cloudflare` with every name below set.
-
-GitHub (10):
-
-```text
-MCP_TOKEN_BACKEND_DEVELOPMENT_GITHUB
-MCP_TOKEN_DATA_ENGINEERING_ANALYTICS_GITHUB
-MCP_TOKEN_DEVOPS_INFRASTRUCTURE_GITHUB
-MCP_TOKEN_DOCUMENTATION_TECHNICAL_WRITING_GITHUB
-MCP_TOKEN_FRONTEND_DEVELOPMENT_GITHUB
-MCP_TOKEN_FULL_STACK_DEVELOPMENT_GITHUB
-MCP_TOKEN_MOBILE_DEVELOPMENT_GITHUB
-MCP_TOKEN_QUALITY_ASSURANCE_TESTING_GITHUB
-MCP_TOKEN_SECURITY_COMPLIANCE_GITHUB
-MCP_TOKEN_SOFTWARE_ARCHITECTURE_GITHUB
-```
-
-Cloudflare (6):
-
-```text
-MCP_TOKEN_BACKEND_DEVELOPMENT_CLOUDFLARE
-MCP_TOKEN_DEVOPS_INFRASTRUCTURE_CLOUDFLARE
-MCP_TOKEN_FRONTEND_DEVELOPMENT_CLOUDFLARE
-MCP_TOKEN_FULL_STACK_DEVELOPMENT_CLOUDFLARE
-MCP_TOKEN_SECURITY_COMPLIANCE_CLOUDFLARE
-MCP_TOKEN_SOFTWARE_ARCHITECTURE_CLOUDFLARE
-```
-
-## 8. Let other people in
-
-`access-email-groups.json` maps only the two admin emails. Anyone else who passes the Access policy still cannot invoke a role until their email is listed with `dept:<slug>` or `role:<slug>`. Do not put `admin` on any other address. Do not add `*@hodgedomain.com` or `*@hodgederrick.com`.
-
-After editing the file:
+`access-email-groups.json` maps only the two admin emails. Anyone else who passes Access still cannot invoke a role until their email is listed with `dept:<slug>` or `role:<slug>`. Do not put `admin` on any other address. Do not add `*@hodgedomain.com` or `*@hodgederrick.com`. After editing:
 
 ```powershell
 npm.cmd run generate
@@ -163,20 +56,20 @@ npm.cmd run check
 npm.cmd exec -- wrangler deploy --config packages/router/wrangler.jsonc
 ```
 
-Add the same people to the Access application policy **Allow Hodge** if they are not already one of the two emails. Access and the Worker map are separate. Both have to allow the person.
+Add the same people to Access policy **Allow Hodge**. Access and the Worker map are separate.
 
-## 9. Leave these undone on purpose
+## Leave these undone on purpose
 
-- No OAuth broker Worker. Notion, Slack, Figma, Drive, Salesforce, HubSpot, and the other OAuth-only hosts in `agents-mcps/docs/mcp-auth-modes.md` get no `MCP_TOKEN_*`.
-- No service-token or client-id path on the router. CI has no way in until that is designed.
+- No OAuth broker Worker. Notion, Slack, Figma, Drive, Salesforce, HubSpot, and the other OAuth-only hosts in `agents-mcps/docs/mcp-auth-modes.md` get no `MCP_TOKEN_*`. Generate leaves them unmounted.
+- No service-token or client-id path on the router.
 - Snowflake's catalog URL is still the tenant template `org-account.snowflakecomputing.com`. Replace it in `agents-mcps`, commit, then `npm run sync-mcp` in the platform and commit the new lock.
 - Do not merge unread `mcp-catalog.overrides.draft.json`.
 - Do not rename Flue agent functions or delete Durable Object migrations.
+- Do not run `list-mcp-tools --apply` from the platform. Tool-name overrides stay in `agents-mcps` and are reviewed by hand.
 
 ## Done when
 
-- `wrangler secret list --name agents-mcp-gateway` shows `DEPT_KEYS` plus the GitHub and Cloudflare names you minted, and no others.
-- All 20 `agents-<slug>` Workers and `agents-router` (full `wrangler.jsonc`) are deployed.
-- `https://agents.hodgederrick.com` still redirects to `zerothinking.cloudflareaccess.com`, and a request with no JWT returns 401 from the Worker.
-- One GitHub read and one Cloudflare read succeed through the router for a pilot department, using that department's own token.
-- `npm.cmd run check` passes in `agents-platform`.
+- Layer 1: agents boot (`mcp` only for present secrets), `npm.cmd run check` passes, GitHub read through the router still works, one Cloudflare read through the router works, unauthenticated traffic is Access 302 or Worker 401 with no Service Auth bypass.
+- Layer 2: playbooks are real procedures, not placeholders.
+- Layer 3: work can move to another department's Worker.
+- Layer 4: inbound work is assigned without the caller hard-coding department and role.
